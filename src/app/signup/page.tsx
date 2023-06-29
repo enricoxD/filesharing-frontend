@@ -109,9 +109,10 @@ export default function Page() {
               </div>
               <div className={"information"}>
                 {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link>
-                </p>
-                <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
+                <div className={"links"}>
+                  <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link></p>
+                  <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
+                </div>
               </div>
             </div>
           </div>

@@ -101,9 +101,10 @@ export default function Login() {
               </div>
               <div className={"information"}>
                 {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <p className={"signup"}>Don&apos;t have an account? <Link href={"/signup"}>Sign Up</Link>
-                </p>
-                <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
+                <div className={"links"}>
+                  <p className={"signup"}>Don&apos;t have an account? <Link href={"/signup"}>Sign Up</Link></p>
+                  <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
+                </div>
               </div>
             </div>
           </div>
