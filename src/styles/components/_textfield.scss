@@ -1,0 +1,73 @@
+.textfield {
+  border: 1px solid $outline;
+  display: flex;
+  flex-direction: row;
+  transition: 0.35s ease-in-out;
+  @include desktop {
+    min-width: 24rem;
+  }
+  max-width: 48rem;
+  overflow: hidden;
+
+  &.top-rounded {
+    border-radius: 8px 8px 0 0;
+  }
+
+  &.cut {
+    border-radius: 0;
+  }
+
+  &.rounded {
+    border-radius: 8px;
+  }
+
+  .input-icon {
+    border-radius: 8px 0 0 0;
+    background: $surface;
+    font-size: 22px;
+    transition: 0.35s ease-in-out;
+  }
+
+  Input {
+    outline: none;
+    background: none;
+    border: none;
+    flex: 1;
+    font-size: 18px;
+  }
+
+  Input, .input-icon {
+    padding-block: 5px;
+    padding-inline: 8px;
+    color: $secondary;
+  }
+
+  .toggle-password-icon {
+    font-size: 22px;
+    padding-block: 5px;
+    padding-inline: 12px;
+
+    .hidden {
+      transition: 0.35s;
+      color: $outline-variant;
+    }
+
+    .shown {
+      transition: 0.35s;
+      color: $primary;
+    }
+  }
+
+  &:focus-within {
+    transform: scale(1.05);
+    border: 1px solid $primary;
+    box-shadow: $primary 0 0 12px 0; // glow
+    transition: 0.35s ease-in-out;
+
+    .input-icon {
+      background-color: $primary;
+      color: $surface;
+      transition: 0.35s ease-in-out;
+    }
+  }
+}
