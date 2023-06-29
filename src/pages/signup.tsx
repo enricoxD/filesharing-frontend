@@ -7,7 +7,6 @@ import {Button} from "@/components/Button";
 import Link from "next/link";
 import Image from "next/image";
 import {api} from "@/utils/api";
-import checkPassword from "@/utils/signup_validation";
 
 interface FormData {
   name: string;
@@ -26,11 +25,6 @@ export default function Signup() {
 
   const handleSignup = async (event: SyntheticEvent) => {
     event.preventDefault();
-
-    if (!checkPassword(formData.password)) {
-      
-      setExceptionMessage("");
-    }
 
     try {
       const response = await api.post('/auth/register', formData, {
