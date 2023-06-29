@@ -1,31 +1,20 @@
 .textfield {
-  border: 1px solid $outline;
   display: flex;
+  border: 1px solid $outline;
   flex-direction: row;
   transition: 0.35s ease-in-out;
-  @include desktop {
-    min-width: 24rem;
-  }
-  max-width: 48rem;
   overflow: hidden;
-
-  &.top-rounded {
-    border-radius: 8px 8px 0 0;
-  }
-
-  &.cut {
-    border-radius: 0;
-  }
-
-  &.rounded {
-    border-radius: 8px;
-  }
+  border-radius: 6px;
+  height: 2.25rem;
+  width: 100%;
 
   .input-icon {
-    border-radius: 8px 0 0 0;
     background: $surface;
-    font-size: 22px;
-    transition: 0.35s ease-in-out;
+    height: 100%;
+    color: $secondary;
+    padding-block: 0.25rem;
+    padding-inline: 8px;
+    transition: background-color 0.35s ease-in-out;
   }
 
   Input {
@@ -33,40 +22,37 @@
     background: none;
     border: none;
     flex: 1;
-    font-size: 18px;
-  }
-
-  Input, .input-icon {
-    padding-block: 5px;
-    padding-inline: 8px;
-    color: $secondary;
+    font-size: 1rem;
+    padding-left: 0.5rem;
   }
 
   .toggle-password-icon {
     font-size: 22px;
-    padding-block: 5px;
-    padding-inline: 12px;
+    height: 100%;
+    padding-block: 0.5rem;
+    padding-inline: 8px;
+    width: 2rem;
 
     .hidden {
       transition: 0.35s;
-      color: $outline-variant;
+      color: white;
     }
 
     .shown {
       transition: 0.35s;
-      color: $primary;
+      color: $secondary;
     }
   }
 
   &:focus-within {
-    transform: scale(1.05);
+    //transform: scale(1.05);
     border: 1px solid $primary;
     box-shadow: $primary 0 0 12px 0; // glow
     transition: 0.35s ease-in-out;
 
     .input-icon {
       background-color: $primary;
-      color: $surface;
+      color: white;
       transition: 0.35s ease-in-out;
     }
   }

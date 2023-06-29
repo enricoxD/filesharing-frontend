@@ -1,95 +1,112 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import {SyntheticEvent, useState} from "react";
+import Textfield from "@/components/Textfield";
+import {mdiAccount, mdiClose, mdiLock} from "@mdi/js";
+import {Button} from "@/components/Button";
+import Link from "next/link";
+import Image from "next/image";
+import {api} from "@/utils/api";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+interface FormData {
+    name: string;
+    password: string;
+}
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+export default function Login() {
+    const [formData, setFormData] = useState<FormData>({
+        name: '',
+        password: '',
+    });
+    const [showException, setShowException] = useState<boolean>(false);
+    const [exception, setException] = useState<String | false>(false);
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+    const handleLogin = async (event: SyntheticEvent) => {
+        event.preventDefault();
+        try {
+            const response = await api.post('/auth/login', formData, {
+                withCredentials: true
+            });
+            if (response.data.data) {
+                window.location.replace("https://google.com");
+                return
+            }
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+            if (response.data.message) {
+                setExceptionMessage(response.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
+    const setExceptionMessage = (message: String) => {
+        setException(message);
+        setShowException(true);
+        setTimeout(() => {
+            setShowException(false);
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+            setTimeout(() => {
+                setException(false);
+            }, 1000)
+        }, 7500)
+    }
+
+    const handleTextfieldChange = (event: SyntheticEvent<HTMLInputElement>) => {
+        const {name, value} = event.currentTarget;
+        setFormData((prevFormData: FormData) => ({...prevFormData, [name]: value}));
+    };
+
+    return (
+        <main className={"auth-page"}>
+            <div className={"loginsection container"}>
+                <div className={"authcard"}>
+                    <h1>Login</h1>
+                    <div className={"content-frame"}>
+                        <div className={"credentials"}>
+                            <Textfield
+                                placeholder={"Username"}
+                                name={"name"}
+                                password={false}
+                                onChange={handleTextfieldChange}
+                                isRequired={true}
+                                icon={mdiAccount}
+                            />
+                            <Textfield
+                                placeholder={"Password"}
+                                name={"password"}
+                                password
+                                onChange={handleTextfieldChange}
+                                isRequired={true}
+                                icon={mdiLock}
+                            />
+                        </div>
+
+                        <Button layout={"filled"} disabled={false} arsch={handleLogin}>
+                            <p>Login</p>
+                        </Button>
+                        <Link href={"/hallo/"} className={"center"}>
+                            Forgot Password?
+                        </Link>
+                        <div className={"sso"}>
+                            <span className={"divider"}>Or</span>
+                            <div className={"provider"}>
+                                <Link href={{/*TODO*/}}>
+                                    <Image src={"/google.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
+                                </Link>
+                                <Link href={{/*TODO*/}}>
+                                    <Image src={"/github.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className={"information"}>
+                            {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
+                            <p className={"signup"}>Don&apos;t have an account? <Link href={"/signup"}>Sign Up</Link>
+                            </p>
+                            <Link href={"/signup"} className={"terms"}>Terms & Conditions</Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    )
 }

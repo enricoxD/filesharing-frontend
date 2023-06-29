@@ -1,33 +1,44 @@
 "use client";
+import '@/styles/styles.scss'
 import {SyntheticEvent, useState} from "react";
 import Textfield from "@/components/Textfield";
-import {mdiAccount, mdiClose, mdiLock} from "@mdi/js";
+import {mdiAccount, mdiClose, mdiEmail, mdiLock, mdiLockCheck} from "@mdi/js";
 import {Button} from "@/components/Button";
 import Link from "next/link";
 import Image from "next/image";
 import {api} from "@/utils/api";
+import checkPassword from "@/utils/signup_validation";
 
 interface FormData {
   name: string;
   password: string;
+  email: string;
 }
 
-export default function Login() {
+export default function Signup() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     password: '',
+    email: '',
   });
   const [showException, setShowException] = useState<boolean>(false);
   const [exception, setException] = useState<String | false>(false);
 
-  const handleLogin = async (event: SyntheticEvent) => {
+  const handleSignup = async (event: SyntheticEvent) => {
     event.preventDefault();
+
+    if (!checkPassword(formData.password)) {
+      
+      setExceptionMessage("");
+    }
+
     try {
-      const response = await api.post('/auth/login', formData, {
+      const response = await api.post('/auth/register', formData, {
         withCredentials: true
       });
+
       if (response.data.data) {
-        window.location.replace("https://google.com");
+        process.env.BASE_URL && window.location.replace(process.env.BASE_URL);
         return
       }
 
@@ -60,16 +71,22 @@ export default function Login() {
       <main className={"auth-page"}>
         <div className={"loginsection container"}>
           <div className={"authcard"}>
-            <h1>Login</h1>
+            <h1>Signup</h1>
             <div className={"content-frame"}>
               <div className={"credentials"}>
                 <Textfield
                     placeholder={"Username"}
                     name={"name"}
-                    password={false}
                     onChange={handleTextfieldChange}
                     isRequired={true}
                     icon={mdiAccount}
+                />
+                <Textfield
+                    placeholder={"E-Mail"}
+                    name={"email"}
+                    onChange={handleTextfieldChange}
+                    isRequired={true}
+                    icon={mdiEmail}
                 />
                 <Textfield
                     placeholder={"Password"}
@@ -81,12 +98,10 @@ export default function Login() {
                 />
               </div>
 
-              <Button layout={"filled"} disabled={false} arsch={handleLogin}>
-                <p>Login</p>
+              <Button layout={"filled"} disabled={false} arsch={handleSignup}>
+                <p>Signup</p>
               </Button>
-              <Link href={"/hallo/"} className={"center"}>
-                Forgot Password?
-              </Link>
+
               <div className={"sso"}>
                 <span className={"divider"}>Or</span>
                 <div className={"provider"}>
@@ -100,7 +115,7 @@ export default function Login() {
               </div>
               <div className={"information"}>
                 {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <p className={"signup"}>Don&apos;t have an account? <Link href={"/signup"}>Sign Up</Link>
+                <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link>
                 </p>
                 <Link href={"/signup"} className={"terms"}>Terms & Conditions</Link>
               </div>

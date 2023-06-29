@@ -1,24 +1,25 @@
-import React, { ComponentProps, useState } from "react";
-import { Icon } from "@/assets/icon";
+import React, {ComponentProps, SyntheticEvent, useState} from "react";
+import Icon from '@mdi/react';
+import {mdiAbacus, mdiEye, mdiEyeOff} from '@mdi/js';
 
 
 interface TextfieldProps extends ComponentProps<"input"> {
-  icon: string;
-  placeholder: string;
-  password: boolean;
-  valueState: [string, React.Dispatch<React.SetStateAction<string>>];
-  isRequired: boolean;
-  border: "cut" | "rounded" | "top-rounded";
+  icon?: string;
+  name?: string;
+  placeholder?: string;
+  password?: boolean;
+  onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
+  isRequired?: boolean;
 }
 
 const Textfield: React.FC<TextfieldProps> = (props) => {
   const {
     icon,
+    name,
     placeholder,
     password,
-    valueState,
+    onChange,
     isRequired,
-    border,
     children,
     className,
     ...attributes
@@ -26,23 +27,24 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
   const [showInput, setShowInput] = useState(!password);
 
   return (
-    <div className={`textfield ${border}`} {...attributes}>
-      <span className={`mdi ${icon} input-icon`} />
+    <div className={`textfield`} {...attributes}>
+      {icon && <Icon path={icon} className={"input-icon"} />}
       <input
         type={`${showInput ? "text" : "password"}`}
+        name={name}
         className={icon ? "input-with-icon" : "input"}
         placeholder={placeholder}
+        onChange={(event) => onChange && onChange(event) }
       />
       {password && (
         <a
-          className={` toggle-password-icon`}
+          className={`toggle-password-icon`}
           onClick={() => setShowInput(!showInput)}
         >
-          <span
-            className={`mdi ${
-              showInput ? `${Icon.Eye_Off} shown` : `${Icon.Eye} hidden`
-            }`}
-          />
+            {<Icon
+                path={showInput ? mdiEyeOff : mdiEye}
+                className={showInput ? 'shown' : 'hidden'}
+            />}
         </a>
       )}
     </div>

@@ -1,0 +1,139 @@
+.auth-page {
+  margin-top: 100px;
+  position: relative;
+  height: calc(100vh - 100px);
+  width: 100%;
+  display: flex;
+
+  .authcard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 80vh;
+    display: flex;
+    padding: 2.5rem 2.5rem 3.5rem 2.5rem;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1.25rem;
+    border: 1px solid #49454F;
+    background: linear-gradient(294deg, rgba(191, 191, 191, 0.06) 0%, rgba(137, 137, 137, 0.04) 55.21%, rgba(0, 0, 0, 0.00) 100%), rgba(37, 35, 42, 0.14);
+    box-shadow: -0.5rem 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.35);
+
+    @include mobile {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+
+    .content-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .credentials {
+        padding-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: 0.75rem;
+      }
+
+      .sso {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+        justify-content: center;
+        gap: 0.5rem;
+
+        .divider {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          color: $surface-400;
+
+          &::after, &::before {
+            content: "";
+            width: 100%;
+            border: 1px solid $surface-400;
+            flex: 1;
+          }
+
+          &:not(:empty)::before {
+            margin-right: 0.75em;
+          }
+
+          &:not(:empty)::after {
+            margin-left: 0.75em;
+          }
+        }
+
+        .provider {
+          display: flex;
+          justify-content: center;
+          gap: 0.75rem;
+
+          img {
+            transition: 0.35s ease-in-out;
+
+            &:hover {
+              transform: scale(1.2);
+              rotate: 4deg;
+            }
+          }
+        }
+      }
+
+      .information {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-self: center;
+        text-align: center;
+
+        .exception {
+          background: rgba($red-400, 0.3);
+          border-radius: 8px;
+          padding: 1rem;
+          color: $red-500;
+          font-size: 1rem;
+          margin-bottom: 8px;
+          transition: all 0.35s ease-in-out;
+
+          &.shown {
+            opacity: 1;
+          }
+
+          &.hidden {
+            opacity: 0;
+            transform: scale(0.65);
+          }
+        }
+
+        .signup {
+          font-size: 1rem;
+
+           a {
+             color: $primary-200;
+
+             &:hover {
+               color: white;
+             }
+           }
+        }
+
+        .terms {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
