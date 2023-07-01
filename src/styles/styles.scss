@@ -1,10 +1,16 @@
+@import "bulma/sass/utilities/all";
+
 @import "colors";
 @import "globals";
 
 @import "bulma/sass/utilities/mixins";
 @import "bulma/sass/layout/section";
 @import "bulma/sass/elements/container";
-
+@import "bulma/sass/elements/table";
 @import "src/styles/pages/auth-page";
+@import "src/styles/pages/upload-page";
+
 @import "src/styles/components/textfield";
 @import "src/styles/components/button";
+@import "src/styles/components/fileupload/drag-and-drop";
+@import "src/styles/components/fileupload/file-list";

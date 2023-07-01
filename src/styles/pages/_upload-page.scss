@@ -1,0 +1,30 @@
+.upload-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: 1px solid red;
+
+  .filelist {
+    width: 100%;
+  }
+
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+
+    @include desktop {
+      gap: 1.5rem;
+
+      .textfield {
+        width: 33%;
+      }
+
+      .button {
+        width: 33%;
+      }
+    }
+  }
+}

@@ -37,3 +37,15 @@ $outline-variant: $surface-200;
 $surface: $surface-mixed-200;
 $primary: $primary-100;
 $secondary: $primary-400;
+$primary-gradient: linear-gradient(45deg, #a100ff, #7a00ff, #9f067f, #891bb0, #a100ff);
+
+// Table
+$table-color: #25232A;
+$table-cell-heading-color: white;
+$table-head-cell-color: white;
+$table-foot-cell-color: white;
+$table-background-color: $surface;
+$table-row-hover-background-color: bulmaLighten($surface, 3%);
+$table-striped-row-even-background-color: bulmaLighten($surface, 5%);
+$table-striped-row-even-hover-background-color: bulmaLighten($surface, 8%);
+$table-cell-border: 0;

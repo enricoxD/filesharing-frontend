@@ -1,0 +1,241 @@
+/*
+.file-list {
+  .head {
+    background-color: $surface;
+    border-radius: 12px 12px 0 0;
+    border-width: 4px;
+    border-style: solid;
+    border-image: $primary-gradient 1;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+
+    .description {
+      display: inline;
+
+      p {
+        display: inline;
+      }
+    }
+
+    .collapse-button {
+      &:hover {
+        color: $primary;
+      }
+      display: grid;
+      float: right;
+      font-size: 1.25rem;
+
+      .open-icon, .close-icon {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      > * {
+        transition: opacity 0.5s;
+      }
+
+      &.is-active {
+        .open-icon {
+          opacity: 0;
+        }
+        .close-icon {
+          opacity: 100%;
+          transform: rotate(180deg);
+          transition: transform 1s;
+        }
+      }
+
+      &:not(.is-active) {
+        .open-icon {
+          opacity: 100%;
+          transform: rotate(-360deg);
+          transition: transform 1s;
+        }
+        .close-icon {
+          opacity: 0;
+        }
+      }
+
+      &.is-disabled {
+        cursor: default;
+        color: $outline;
+
+        .open-icon {
+          opacity: 0;
+        }
+
+        .close-icon {
+          opacity: 100%;
+        }
+      }
+    }
+  }
+
+  .content {
+    overflow: hidden;
+    background-color: bulmaLighten($surface, 5%);
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.33);
+    border-radius: 0 0 6px 6px;
+    max-height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.5s ease-in-out, max-height 0.5s ease-in-out;
+
+    &.is-active {
+      transform: scaleY(1);
+      max-height: 1000px;
+      transition: transform 0.5s ease-in-out, max-height 0.5s ease-in-out;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+
+
+    }
+  }
+}*/
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+
+  .head {
+    display: flex;
+    background-color: $surface;
+    height: 2rem;
+    border-radius: 12px 12px 0 0;
+    border-width: 4px;
+    border-style: solid;
+    border-image: $primary-gradient 1;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    .title {
+      position: relative;;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.125;
+      text-align: center;
+    }
+
+    .collapse-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 2rem;
+      transition: 0.25s ease-in-out;
+
+      &.open {
+        rotate: 180deg;
+      }
+    }
+  }
+
+  .content {
+    overflow: scroll;
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.33);
+    border-radius: 0 0 6px 6px;
+    transform: scaleY(0);
+    max-height: 0;
+    transform-origin: top;
+    transition: transform 0.45s ease-in-out, max-height 0.75s ease-in-out;
+
+    &.open {
+      transform: scaleY(1);
+      max-height: 24rem;
+    }
+
+    .table {
+      display: block;
+      overflow: auto;
+
+      thead {
+        tr {
+          th {
+            border-bottom: 1px solid $surface-500;
+          }
+        }
+      }
+
+      tfoot {
+        tr {
+          th {
+            border-top: 1px solid $surface-500;
+          }
+        }
+      }
+
+      .entry {
+        transition: background-color 0.2s ease-in-out;
+        .action {
+          display: flex;
+          height: 100%;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+
+          .delete-icon {
+            width: 1.5rem;
+            height: 100%;
+
+            * {
+              color: white;
+              transition: color 0.35s ease-in-out;
+            }
+          }
+
+          &:hover {
+            .delete-icon * {
+              color: $red-500;
+            }
+          }
+        }
+      }
+
+
+      .delete-icon {
+        color: $primary;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      @include desktop {
+        .index {
+          width: 5%;
+        }
+
+        .filename {
+          width: 70%;
+        }
+
+        .filetype {
+          width: 10%;
+        }
+
+        .filesize {
+          width: 10%;
+        }
+      }
+
+      .action {
+        width: 5%;
+      }
+    }
+  }
+}
+
+
+
+/*
+$table-row-hover-background-color: bulmaLighten($surface, 3%);
+$table-striped-row-even-background-color: bulmaLighten($surface, 5%);
+$table-striped-row-even-hover-background-color: bulmaLighten($surface, 8%);*/
