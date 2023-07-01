@@ -3,17 +3,17 @@ import React, {ComponentProps, SyntheticEvent} from "react";
 export type ButtonTypes = "filled";
 
 interface ButtonProps extends ComponentProps<"button"> {
-    arsch: (event: SyntheticEvent) => void;
+    onClick: (event: SyntheticEvent) => void;
     layout: ButtonTypes;
-    disabled: boolean;
+    disabled?: boolean;
 }
 
 export const Button = (props: ButtonProps) => {
-    const {children, className, disabled, layout, arsch, ...attributes} = props;
+    const {children, className, disabled, layout, onClick, ...attributes} = props;
     return (
         <button
             className={`button ${disabled ? "disabled" : ""} ${layout} ${className ? className : ''}`}
-            onClick={arsch}
+            onClick={onClick}
             {...attributes}
         >
             {children}

@@ -92,7 +92,7 @@ export default function Page() {
                 />
               </div>
 
-              <Button layout={"filled"} disabled={false} arsch={handleSignup}>
+              <Button layout={"filled"} disabled={false} onClick={handleSignup}>
                 <p>Signup</p>
               </Button>
 
