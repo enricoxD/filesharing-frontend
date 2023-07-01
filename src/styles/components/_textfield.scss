@@ -1,59 +1,68 @@
 .textfield {
   display: flex;
-  border: 1px solid $outline;
   flex-direction: row;
-  transition: 0.35s ease-in-out;
-  overflow: hidden;
-  border-radius: 6px;
-  height: 2.25rem;
   width: 100%;
+  height: 2.25rem;
+  border: 1px solid $outline;
+  transition: 0.35s ease-in-out;
+  border-radius: 6px;
+  justify-content: center;
+  overflow: hidden;
 
-  .input-icon {
+  .prefix-icon {
     background: $surface;
-    height: 100%;
-    color: $secondary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2.5rem;
+    padding-inline: 0.25rem;
     padding-block: 0.25rem;
-    padding-inline: 8px;
+    height: 100%;
     transition: background-color 0.35s ease-in-out;
+
+    * {
+      color: white;
+      transition: 0.35s ease-in-out;
+    }
   }
 
   Input {
+    width: calc(100% - 3.75rem);
+    flex-grow: 1;
     outline: none;
     background: none;
     border: none;
-    flex: 1;
-    font-size: 1rem;
     padding-left: 0.5rem;
+    font-size: 1rem;
   }
 
   .toggle-password-icon {
-    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2.25rem;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
     height: 100%;
-    padding-block: 0.5rem;
-    padding-inline: 8px;
-    width: 2rem;
 
-    .hidden {
-      transition: 0.35s;
-      color: white;
+    .shown * {
+      color: $primary-300;
+      transition: 0.35s ease-in-out;
     }
 
-    .shown {
-      transition: 0.35s;
-      color: $secondary;
+    .hidden * {
+      color: white;
     }
   }
 
   &:focus-within {
-    //transform: scale(1.05);
     border: 1px solid $primary;
     box-shadow: $primary 0 0 12px 0; // glow
     transition: 0.35s ease-in-out;
+    transform: scale(1.05);
 
-    .input-icon {
-      background-color: $primary;
-      color: white;
-      transition: 0.35s ease-in-out;
+    .prefix-icon * {
+      color: $primary-100;
     }
   }
 }

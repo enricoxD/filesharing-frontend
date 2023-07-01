@@ -1,6 +1,6 @@
 import React, {ComponentProps, SyntheticEvent, useState} from "react";
 import Icon from '@mdi/react';
-import {mdiAbacus, mdiEye, mdiEyeOff} from '@mdi/js';
+import {mdiEye, mdiEyeOff} from '@mdi/js';
 
 
 interface TextfieldProps extends ComponentProps<"input"> {
@@ -28,7 +28,7 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
 
   return (
     <div className={`textfield`} {...attributes}>
-      {icon && <Icon path={icon} className={"input-icon"} />}
+      {icon && <Icon path={icon} className={"prefix-icon"}/>}
       <input
         type={`${showInput ? "text" : "password"}`}
         name={name}
@@ -37,10 +37,7 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
         onChange={(event) => onChange && onChange(event) }
       />
       {password && (
-        <a
-          className={`toggle-password-icon`}
-          onClick={() => setShowInput(!showInput)}
-        >
+        <a className={`toggle-password-icon`} onClick={() => setShowInput(!showInput)}>
             {<Icon
                 path={showInput ? mdiEyeOff : mdiEye}
                 className={showInput ? 'shown' : 'hidden'}
