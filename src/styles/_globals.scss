@@ -6,6 +6,7 @@ $font-sans: 'Noto Sans', 'Trebuchet MS', sans-serif;
 
 h1, p {
   font-family: $font-mono;
+  color: white;
 }
 
 * {
@@ -13,6 +14,7 @@ h1, p {
   padding: 0;
   margin: 0;
   font-family: $font-sans;
+  color: white;
 }
 
 html,
