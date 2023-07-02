@@ -50,6 +50,27 @@ a {
   }
 }
 
+select {
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  border: 1px solid $outline;
+  transition: 0.35s ease-in-out;
+  border-radius: 6px;
+  background: $surface;
+  font-family: $font-sans;
+  color: white;
+  font-size: 16px;
+
+  * {
+    padding-block: 1rem;
+  }
+
+  option {
+    height: 1.25rem;
+  }
+}
+
 .is-hidden {
   display: none !important;
 }
