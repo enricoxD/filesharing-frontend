@@ -13,6 +13,7 @@ export const Button = (props: ButtonProps) => {
     return (
         <button
             className={`button ${disabled ? "disabled" : ""} ${layout} ${className ? className : ''}`}
+            disabled={disabled}
             onClick={onClick}
             {...attributes}
         >
