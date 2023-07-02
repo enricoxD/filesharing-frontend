@@ -5,48 +5,87 @@ import DragAndDropArea from "@/components/fileupload/DragAndDropArea";
 import FileList from "@/components/fileupload/FileList";
 import "@/styles/styles.scss"
 import Textfield from "@/components/Textfield";
-import {mdiEmail, mdiLock, mdiTextRecognition} from "@mdi/js";
+import {mdiLock, mdiTextRecognition} from "@mdi/js";
+import {api} from "@/utils/api";
 
 export interface UploadData {
     title: string,
     password: string,
-    files: File[]
+    files: File[],
+    deleteIn: string
+}
+
+enum DeleteIn {
+    ONE_DAY = "1 Day",
+    ONE_WEEK = "1 Week",
+    TWO_WEEKS = "2 Weeks",
+    ONE_MONTH = "1 Month",
+    THREE_MONTH = "3 Months",
 }
 
 export default function File() {
     const [uploadData, setUploadData] = useState<UploadData>({
         title: "",
         password: "",
+        deleteIn: DeleteIn.ONE_WEEK,
         files: []
     });
-    const [response, setResponse] = useState<string>("");
+    const [showException, setShowException] = useState<boolean>(false);
+    const [exception, setException] = useState<String | false>(false);
+
 
     const uploadFiles = async () => {
         console.log("Upload!");
         const formData = new FormData();
+        formData.append("title", uploadData.title)
+        formData.append("password", uploadData.password)
+        formData.append("deleteIn", uploadData.deleteIn)
         uploadData.files.forEach((file, index) => {
             formData.append(`file`, file);
         });
 
-        const response = await fetch("/api/files", {
-            method: "POST",
-            body: formData,
-        });
+        try {
+            const response = await api.post('/file/upload', formData, {
+                withCredentials: true
+            });
+            if (response.data.data) {
+                console.log(response.data.data)
+                console.log(`${process.env.BASE_URL}/${response.data.message}`)
+                //process.env.BASE_URL && window.location.replace(`${process.env.BASE_URL}/${response.data.message}`);
+                return
+            }
 
-        // Check the status code of the response
-        if (response.ok) {
-            // The file was successfully uploaded
-            setResponse("File uploaded successfully");
-        } else {
-            // There was an error uploading the file
-            setResponse("Error uploading file");
+            if (response.data.message) {
+                setExceptionMessage(response.data.message);
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
+
+    const setExceptionMessage = (message: String) => {
+        setException(message);
+        setShowException(true);
+        setTimeout(() => {
+            setShowException(false);
+
+            setTimeout(() => {
+                setException(false);
+            }, 1000)
+        }, 7500)
+    }
 
     const setFiles = (files: File[]) => {
         setUploadData((prevData: UploadData) => ({
             ...prevData,
             files: files
+        }))
+    }
+
+    const setDeleteIn = (deleteIn: string) => {
+        setUploadData((prevData: UploadData) => ({
+            ...prevData,
+            deleteIn: deleteIn
         }))
     }
 
@@ -85,10 +124,23 @@ export default function File() {
                     isRequired={true}
                     icon={mdiLock}
                 />
-                <Button layout={"filled"} onClick={uploadFiles}>
-                    Submit
-                </Button>
+                <div className={"delete-in-selection"}>
+                    <p>Delete In</p>
+                    <select>
+                        {Object.entries(DeleteIn).map(([key, value]) => {
+                            return <option value={key} key={key} onClick={() => setDeleteIn(key)}>
+                                {value}
+                            </option>
+                        })}
+                    </select>
+                </div>
             </form>
+            <div className={"section submit-button"}>
+                {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
+                <Button layout={"filled"} disabled={uploadData.files.length == 0} onClick={uploadFiles}>
+                    <p>Upload</p>
+                </Button>
+            </div>
         </main>
     )
 }

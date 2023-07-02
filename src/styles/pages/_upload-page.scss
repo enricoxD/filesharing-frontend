@@ -15,16 +15,28 @@
     width: 100%;
     justify-content: center;
 
+    .delete-in-selection {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
     @include desktop {
       gap: 1.5rem;
 
-      .textfield {
+      .textfield, .button, .delete-in-selection {
         width: 33%;
       }
+    }
+  }
 
-      .button {
-        width: 33%;
-      }
+  .submit-button {
+    width: 100%;
+
+    @include  desktop {
+      width: 33%;
     }
   }
 }
