@@ -4,7 +4,7 @@ $font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
 
 $font-sans: 'Noto Sans', 'Trebuchet MS', sans-serif;
 
-h1, p {
+h1, h2, h3, h4, p {
   font-family: $font-mono;
   color: white;
 }
@@ -73,4 +73,18 @@ select {
 
 .is-hidden {
   display: none !important;
+}
+
+.gradient-text {
+  background: $primary-gradient;
+  background-size: 400% 100%;
+  animation: glowing 40s linear infinite;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }

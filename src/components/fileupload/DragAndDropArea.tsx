@@ -39,7 +39,7 @@ const DragAndDropArea: React.FC<DragAndDropProps> = (props) => {
         addFiles(e.dataTransfer.files);
       }}
     >
-      <p className="title">Drag and drop a file here</p>
+      <p className="title gradient-text">Drag and drop a file here</p>
       <p className="subtitle">or click the area to select a file</p>
       <p className="max-upload">You may upload up to 3 GB</p>
       <Icon path={mdiFolderZip} className={"icon"} />
