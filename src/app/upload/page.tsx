@@ -6,7 +6,7 @@ import FileList from "@/components/fileupload/FileList";
 import "@/styles/styles.scss"
 import Textfield from "@/components/Textfield";
 import {mdiLock, mdiTextRecognition} from "@mdi/js";
-import {api} from "@/utils/api";
+import {apiFormData} from "@/utils/api";
 
 export interface UploadData {
     title: string,
@@ -45,7 +45,7 @@ export default function File() {
         });
 
         try {
-            const response = await api.post('/file/upload', formData, {
+            const response = await apiFormData.post('/file/upload', formData, {
                 withCredentials: true
             });
             if (response.data.data) {
