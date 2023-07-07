@@ -9,14 +9,14 @@ import Image from "next/image";
 import {api} from "@/utils/api";
 
 interface FormData {
-  name: string;
+  username: string;
   password: string;
   email: string;
 }
 
 export default function Page() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
+    username: '',
     password: '',
     email: '',
   });
@@ -70,7 +70,7 @@ export default function Page() {
               <div className={"credentials"}>
                 <Textfield
                     placeholder={"Username"}
-                    name={"name"}
+                    name={"username"}
                     onChange={handleTextfieldChange}
                     isRequired={true}
                     icon={mdiAccount}
