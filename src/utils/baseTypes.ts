@@ -14,10 +14,8 @@ export type User = {
 export type Upload = {
     author: string;
     title: string;
-    password: string | null;
     uploadedAt: LocalDateTime;
     files: FileUpload[]
-    deletedAt: LocalDateTime | null;
 }
 
 export type FileUpload = {
