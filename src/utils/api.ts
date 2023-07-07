@@ -6,3 +6,9 @@ export const api = axios.create({
     withCredentials: true,
     headers: {'Content-Type': 'application/json'}
 });
+
+export const apiFormData = axios.create({
+    baseURL: BASE_URL,
+    withCredentials: true,
+    headers: {'Content-Type': 'multipart/form-data'}
+});
