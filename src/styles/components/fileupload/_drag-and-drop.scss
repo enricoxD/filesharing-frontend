@@ -13,11 +13,6 @@
     font-weight: 600;
     line-height: 1.125;
     text-align: center;
-    background: $primary-gradient;
-    background-size: 400% 100%;
-    animation: glowing 40s linear infinite;
-    background-clip: text;
-    color: transparent;
   }
 
   .subtitle, .max-upload {
