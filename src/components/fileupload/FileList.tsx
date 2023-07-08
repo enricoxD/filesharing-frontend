@@ -5,7 +5,7 @@ import {mdiChevronDown, mdiClose, mdiDelete} from "@mdi/js";
 
 type FileListProps = {
     files: File[];
-    onFileChange: (files: File[]) => void
+    onFileChange: (files: File[]) => void;
 };
 
 type FileEntryProps = {
@@ -13,9 +13,7 @@ type FileEntryProps = {
     index: number;
 };
 
-const FileList: React.FC<FileListProps> = (props) => {
-    const files = props.files;
-    const onFileChange = props.onFileChange;
+const FileList: React.FC<FileListProps> = ({files, onFileChange}: FileListProps) => {
     const [showFiles, setShowFiles] = useState(true);
 
     const removeFile = (file: File) => {
