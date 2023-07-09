@@ -2,7 +2,7 @@ import {FileUploadType} from "@/utils/baseTypes";
 import Icon from "@mdi/react";
 import {mdiChevronDown} from "@mdi/js";
 import React, {useEffect, useState} from "react";
-import {FileUtils} from "@/utils/FileUtils";
+import {FileUtils} from "@/utils/fileUtils";
 
 interface FileListProps {
     files: FileUploadType[] | File[];
