@@ -21,12 +21,16 @@ export default function Page({params}: { params: { slug: string[] } }) {
     const [isFetching, setIsFetching] = useState<boolean>(true)
     const [requiresPassword, setRequiresPassword] = useState<boolean>(false)
     const [upload, setUpload] = useState<UploadType>()
+    const [failedPassword, setFailedPassword] = useState(0)
 
     const handleResponse = async (data: any) => {
         if (data.data) {
             setUpload(data.data as UploadType)
         } else if (data.message === "Invalid password") {
             setRequiresPassword(true)
+            if (formData.password != "") {
+                setFailedPassword(failedPassword + 1)
+            }
         }
     }
 
@@ -59,6 +63,7 @@ export default function Page({params}: { params: { slug: string[] } }) {
                     upload={upload}
                     isFetching={isFetching}
                     requiresPassword={requiresPassword}
+                    failedPasswordTries={failedPassword}
                     onPasswordChange={handleTextfieldChange}
                     onPasswordSubmit={fetchUploadData}
                     formData={formData}
