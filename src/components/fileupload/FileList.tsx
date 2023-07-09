@@ -1,96 +1,75 @@
-import React, {useState} from "react";
-import {FileUtils} from "@/utils/FileUtils";
+import {FileUploadType} from "@/utils/baseTypes";
 import Icon from "@mdi/react";
-import {mdiChevronDown, mdiClose, mdiDelete} from "@mdi/js";
+import {mdiChevronDown} from "@mdi/js";
+import React, {useEffect, useState} from "react";
+import {FileUtils} from "@/utils/FileUtils";
 
-type FileListProps = {
-    files: File[];
-    onFileChange: (files: File[]) => void;
-};
+interface FileListProps {
+    files: FileUploadType[] | File[];
+    actionIcon: string;
+    iconHoverColor: 'red' | 'primary';
+    actionCallback: (file: FileUploadType | File) => void;
+    collapse?: boolean;
+}
 
-type FileEntryProps = {
-    file: File;
-    index: number;
-};
+export const FileList = ({
+   files,
+   actionIcon,
+   iconHoverColor,
+   actionCallback,
+   collapse,
+}: FileListProps) => {
+    const [showFiles, setShowFiles] = useState(false);
 
-const FileList: React.FC<FileListProps> = ({files, onFileChange}: FileListProps) => {
-    const [showFiles, setShowFiles] = useState(true);
+    const invokeAction = (file: FileUploadType | File) => {
+        return () => actionCallback(file)
+    }
 
-    const removeFile = (file: File) => {
-        if (files.length < 2) {
-            setShowFiles(false);
+    const toggleCollapse = () => {
+        if (!collapse) return;
+        if (files.length == 0) {
+            setShowFiles(false)
+            return
         }
-        onFileChange(files.filter((aFile) => aFile != file));
-    };
+        setShowFiles(!showFiles)
+    }
 
-    const toggleFileOverview = () => {
-        if (files.length == 0 && !showFiles) return;
-        setShowFiles(!showFiles);
-    };
+    useEffect(() => {
+        setShowFiles(files.length != 0)
+    }, [files])
 
-    const totalFileSize = (files: File[]): number => {
-        return files.reduce(
-            (totalSize, currentFile) => totalSize + currentFile.size,
-            0
-        );
-    };
-
-    const FileEntry = (props: FileEntryProps) => {
-        const index = props.index + 1,
-            file = props.file;
+    const FileEntry = ({file, index}: { file: File | FileUploadType, index: number }) => {
         return (
-            <tr className={"entry"}>
-                <th className="index">{index}.</th>
-                <td className="filename">{FileUtils.getName(file)}</td>
-                <td className="filetype">{FileUtils.getFileExtension(file)}</td>
-                <td className="filesize">{FileUtils.getFormattedFileSize(file)}</td>
-                <td className="action" onClick={() => {removeFile(file)}}>
-                    <Icon path={mdiDelete} className={"delete-icon"}/>
-                </td>
-            </tr>
+            <div className={`entry ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                <p className="index">{index+1}.</p>
+                <p className="filename">{FileUtils.getName(file)}<span>.{FileUtils.getFileExtension(file)}</span></p>
+                <p className="filesize">{FileUtils.getFormattedFileSize(file)}</p>
+                <p className="action" onClick={invokeAction(file)}>
+                    <Icon path={actionIcon} className={`action-icon ${iconHoverColor}`}/>
+                </p>
+            </div>
         );
     };
-
 
     return (
         <div className={"file-list"}>
-            <section className={"head"} onClick={() => setShowFiles(!showFiles)}>
-                <p className="title">Selected Files: {files.length}</p>
-                <div className={`collapse-button ${showFiles ? "open" : "closed"}`}>
-                    <Icon path={mdiChevronDown}/>
-                </div>
-            </section>
-            <section className={`content ${showFiles && files.length > 0 ? "open" : "closed"}`}>
-                <table className={`table is-striped is-hoverable`}>
-                    <thead>
-                    <tr>
-                        <th><abbr title="Position">Pos</abbr></th>
-                        <th>File</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {files.map((file, index) => {
-                        return (
-                            <FileEntry key={`file-${index}`} file={file} index={index}/>
-                        );
-                    })}
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>{files.length}</th>
-                        <th/>
-                        <th/>
-                        <th>{FileUtils.getFormattedSize(totalFileSize(files))}</th>
-                        <th/>
-                    </tr>
-                    </tfoot>
-                </table>
-            </section>
+            <div className={"head"} onClick={toggleCollapse}>
+                <p>Total Files: {files.length}</p>
+                {collapse &&
+                    <div className={`collapse-button ${showFiles ? "open" : "closed"}`}>
+                        <Icon path={mdiChevronDown}/>
+                    </div>
+                }
+            </div>
+            <div className={`list ${showFiles ? "open" : "closed"}`}>
+                {files.map((file, index) => {
+                    return <FileEntry file={file} index={index} key={index}/>
+                })}
+            </div>
+            <div className={"footer"}>
+                <p>{files.length}.</p>
+                <p>{FileUtils.getFormattedSize(FileUtils.getTotalSizeOfFiles(files))}</p>
+            </div>
         </div>
     )
-};
-
-export default FileList;
+}

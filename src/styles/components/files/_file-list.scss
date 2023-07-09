@@ -1,0 +1,145 @@
+.file-list {
+  background: $background-variant;
+  border-radius: 8px;
+
+  .head {
+    padding: 1rem;
+    border-width: 3px;
+    border-style: solid;
+    border-image: $primary-gradient 1;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.125;
+    }
+
+    .collapse-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 2rem;
+      transition: 0.25s ease-in-out;
+
+      &.open {
+        rotate: 180deg;
+      }
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    transform: scaleY(0);
+    max-height: 0;
+    transform-origin: top;
+    transition: all 0.45s ease-in-out, max-height 0.75s ease-in-out;
+
+    @include tablet {
+      padding-inline: 1rem;
+    }
+
+    &.open {
+      transform: scaleY(1);
+      padding-block: 1rem;
+      max-height: 24rem;
+    }
+
+    .entry {
+      display: flex;
+      gap: 1rem;
+      padding: 0.5rem;
+      transition: background-color 0.2s ease-in-out;
+      overflow-x: auto;
+
+      &:first-of-type {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+
+      &:last-of-type {
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      &.odd {
+        &:hover {
+          background: bulmaLighten($background-variant, 3%);
+        }
+      }
+
+      &.even {
+        background: bulmaLighten($background-variant, 5%);
+
+        &:hover {
+          background: bulmaLighten($background-variant, 8%);
+        }
+      }
+
+      .filename {
+        flex-grow: 1022;
+      }
+
+      .filesize, .filename, .index {
+        font-size: 18px;
+
+        span {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .entry, .footer {
+    .action {
+      height: 1.25rem;
+      width: 1.25rem;
+      cursor: pointer;
+
+      .action-icon * {
+        color: $surface-600;
+        transition: color 0.35s ease-in-out;
+      }
+
+      &:hover {
+        .action-icon {
+          &.red * {
+            color: $red-500;
+          }
+
+          &.primary * {
+            color: $primary-100;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+    border-width: 3px;
+    border-style: solid;
+    border-image: $primary-gradient 1;
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+    display: flex;
+    justify-content: space-between;
+
+    .index {
+      flex-grow: 100;
+    }
+
+    * {
+      font-size: 18px;
+    }
+  }
+}

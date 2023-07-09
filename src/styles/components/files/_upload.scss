@@ -1,0 +1,76 @@
+.upload {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  width: 100%;
+  height: 100%;
+  background: $surface;
+  border-radius: 8px;
+  gap: 1rem;
+
+  @include tablet {
+    padding: 1.5rem;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .title {
+      text-align: center;
+      font-size: 48px;
+    }
+
+    .post-information {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .author {
+        width: fit-content;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+
+        .avatar {
+          border-radius: 100%;
+          transition: 0.55s ease-in-out;
+        }
+
+        .information {
+          .username {
+            font-size: 21px;
+            transition: color 0.35s ease-in-out;
+          }
+
+          .last-seen {
+            color: $surface-600;
+            transition: color 0.35s ease-in-out;
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          .avatar {
+            border-radius: 12px;
+            scale: 1.1;
+          }
+
+          .information {
+            .username {
+              color: $primary-200;
+            }
+
+            .last-seen {
+              color: $primary-600;
+            }
+          }
+        }
+      }
+    }
+  }
+}

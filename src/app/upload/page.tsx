@@ -2,11 +2,12 @@
 import {SyntheticEvent, useState} from "react";
 import {Button} from "@/components/Button";
 import DragAndDropArea from "@/components/fileupload/DragAndDropArea";
-import FileList from "@/components/fileupload/FileList";
 import "@/styles/styles.scss"
 import Textfield from "@/components/Textfield";
-import {mdiLock, mdiTextRecognition} from "@mdi/js";
+import {mdiDelete, mdiLock, mdiTextRecognition} from "@mdi/js";
 import {apiFormData} from "@/utils/api";
+import {FileList} from "@/components/fileupload/FileList";
+import {FileUploadType} from "@/utils/baseTypes";
 
 export interface UploadData {
     title: string,
@@ -35,7 +36,6 @@ export default function File() {
 
 
     const uploadFiles = async () => {
-        console.log("Upload!");
         const formData = new FormData();
         formData.append("title", uploadData.title)
         formData.append("password", uploadData.password)
@@ -82,6 +82,10 @@ export default function File() {
         }))
     }
 
+    const removeFile = (file: File | FileUploadType) => {
+        setFiles(uploadData.files.filter((aFile) => aFile != file))
+    }
+
     const setDeleteIn = (deleteIn: string) => {
         setUploadData((prevData: UploadData) => ({
             ...prevData,
@@ -103,9 +107,8 @@ export default function File() {
                 />
             </section>
             <section className={"section filelist"}>
-                <FileList files={uploadData.files}
-                          onFileChange={(files) => setFiles(files)}
-                />
+                {/*<FileList mode={"upload"} files={uploadData.files} onFileChange={(files) => setFiles(files)}/>*/}
+                <FileList files={uploadData.files} actionIcon={mdiDelete} iconHoverColor={'red'} actionCallback={(file) => removeFile(file)} collapse />
             </section>
 
             <form className={"section form"}>

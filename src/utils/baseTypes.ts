@@ -1,4 +1,4 @@
-export type User = {
+export type UserType = {
     id: string;
     username: string;
     email: string;
@@ -11,16 +11,22 @@ export type User = {
     apiKet: string | null;
 };
 
-export type Upload = {
+export type AuthorInformation = {
+    username: string;
+    lastSeen: LocalDateTime;
+}
+
+export type UploadType = {
     author: string;
     title: string;
     uploadedAt: LocalDateTime;
-    files: FileUpload[]
+    files: FileUploadType[]
 }
 
-export type FileUpload = {
-    fileName: string;
+export type FileUploadType = {
+    name: string;
     hash: string;
+    size: number;
 }
 
 export type LocalDateTime = {
