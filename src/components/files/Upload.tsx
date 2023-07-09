@@ -12,6 +12,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
     const { author, title, uploadedAt, files} = upload;
     const uploadDate = `${uploadedAt.dayOfMonth} ${capitalize(uploadedAt.month)} ${uploadedAt.year}`
     const [authorInformation, setAuthorInformation] = useState<AuthorInformation>();
+    const [disableDownloadAllButton, setDisableDownloadAllButton] = useState(false)
 
     const requestAuthorInformation = async () => {
         api.post("/file/authorinformation", uploadData)
@@ -33,6 +34,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
     }
 
     const requestPackageDownload = async () => {
+        setDisableDownloadAllButton(true)
         api.post("/file/requestdownloadall", {
             ...uploadData
         }, {
@@ -78,8 +80,8 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
                 actionCallback={(file) => requestDownload(file)}
             />
             <div className={"section is-flex h-center-content"}>
-                <Button onClick={requestPackageDownload} layout={"filled"} className={"desktop-one-third"}>
-                    <p>Download All</p>
+                <Button onClick={requestPackageDownload} layout={"filled"} className={"desktop-one-third"} disabled={disableDownloadAllButton}>
+                    <p>{disableDownloadAllButton ? "Download started" : "Download All"}</p>
                 </Button>
             </div>
         </div>

@@ -31,10 +31,17 @@
     }
   }
 
+  .upload-progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .submit-button {
     width: 100%;
 
-    @include  desktop {
+    @include desktop {
       width: 33%;
     }
   }

@@ -67,7 +67,7 @@ export const FileList = ({
                 })}
             </div>
             <div className={"footer"}>
-                <p>{files.length}.</p>
+                <p>Total Size:</p>
                 <p>{FileUtils.getFormattedSize(FileUtils.getTotalSizeOfFiles(files))}</p>
             </div>
         </div>

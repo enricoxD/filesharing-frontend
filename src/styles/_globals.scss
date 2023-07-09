@@ -84,6 +84,29 @@ select {
   }
 }
 
+progress {
+  box-sizing: border-box;
+  border: solid 3px $surface;
+  width: 75%;
+  height: 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient($surface, $background-variant);
+  font: clamp(.625em, 7.5vw, 5em) monospace;
+
+  &::-webkit-progress-bar {
+    background: transparent
+  }
+
+  &::-webkit-progress-value, &::-moz-progress-bar {
+    border-radius: 12px;
+    box-shadow: inset 0 .05em .05em rgba(#fff, .35);
+    background: var(--fill)
+  }
+
+  --fill: linear-gradient(#{rgba($surface, .65)}, transparent),
+  linear-gradient(45deg, #810869, #9900ff, #891bb0, #9f067f, #a100ff);
+}
+
 .h-center-content {
   justify-content: center;
 }

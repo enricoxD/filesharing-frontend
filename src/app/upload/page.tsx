@@ -33,9 +33,11 @@ export default function File() {
     });
     const [showException, setShowException] = useState<boolean>(false);
     const [exception, setException] = useState<String | false>(false);
-
+    const [uploadStarted, setUploadStarted] = useState(false)
+    const [progress, setProgress] = useState(0);
 
     const uploadFiles = async () => {
+        setUploadStarted(true)
         const formData = new FormData();
         formData.append("title", uploadData.title)
         formData.append("password", uploadData.password)
@@ -46,12 +48,13 @@ export default function File() {
 
         try {
             const response = await apiFormData.post('/file/upload', formData, {
-                withCredentials: true
+                withCredentials: true,
+                onUploadProgress: (progressEvent) => {
+                    setProgress((progressEvent.progress || 0) * 100);
+                },
             });
             if (response.data.data) {
-                console.log(response.data.data)
-                console.log(`${process.env.BASE_URL}/${response.data.message}`)
-                //process.env.BASE_URL && window.location.replace(`${process.env.BASE_URL}/${response.data.message}`);
+                process.env.BASE_URL && window.location.replace(`${process.env.BASE_URL}/file/${response.data.message}`);
                 return
             }
 
@@ -107,7 +110,6 @@ export default function File() {
                 />
             </section>
             <section className={"section filelist"}>
-                {/*<FileList mode={"upload"} files={uploadData.files} onFileChange={(files) => setFiles(files)}/>*/}
                 <FileList files={uploadData.files} actionIcon={mdiDelete} iconHoverColor={'red'} actionCallback={(file) => removeFile(file)} collapse />
             </section>
 
@@ -138,10 +140,16 @@ export default function File() {
                     </select>
                 </div>
             </form>
+            {uploadStarted &&
+                <div className={"upload-progress"}>
+                    <p>{progress.toString().split(".")[0]}% Finished</p>
+                    <progress max={100} value={progress}>{progress}%</progress>
+                </div>
+            }
             <div className={"section submit-button"}>
                 {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <Button layout={"filled"} disabled={uploadData.files.length == 0} onClick={uploadFiles}>
-                    <p>Upload</p>
+                <Button layout={"filled"} disabled={uploadData.files.length == 0 || uploadStarted} onClick={uploadFiles}>
+                    <p>{uploadStarted ? "Upload started" : "Upload"}</p>
                 </Button>
             </div>
         </main>

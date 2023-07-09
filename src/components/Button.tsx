@@ -10,11 +10,17 @@ interface ButtonProps extends ComponentProps<"button"> {
 
 export const Button = (props: ButtonProps) => {
     const {children, className, disabled, layout, onClick, ...attributes} = props;
+
+    const invokeOnClick = (event: SyntheticEvent) => {
+        if (disabled) return
+        onClick(event)
+    }
+
     return (
         <button
             className={`button ${disabled ? "disabled" : ""} ${layout} ${className ? className : ''}`}
             disabled={disabled}
-            onClick={onClick}
+            onClick={invokeOnClick}
             {...attributes}
         >
             {children}
