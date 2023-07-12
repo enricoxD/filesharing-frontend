@@ -2,7 +2,6 @@
 import {SyntheticEvent, useState} from "react";
 import {Button} from "@/components/Button";
 import DragAndDropArea from "@/components/fileupload/DragAndDropArea";
-import "@/styles/styles.scss"
 import Textfield from "@/components/Textfield";
 import {mdiDelete, mdiLock, mdiTextRecognition} from "@mdi/js";
 import {apiFormData} from "@/utils/api";
@@ -129,7 +128,7 @@ export default function File() {
                     isRequired={true}
                     icon={mdiLock}
                 />
-                <div className={"delete-in-selection"}>
+                {/* TODO <div className={"delete-in-selection"}>
                     <p>Delete In</p>
                     <select>
                         {Object.entries(DeleteIn).map(([key, value]) => {
@@ -138,7 +137,7 @@ export default function File() {
                             </option>
                         })}
                     </select>
-                </div>
+                </div>*/}
             </form>
             {uploadStarted &&
                 <div className={"upload-progress"}>

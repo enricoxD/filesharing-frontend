@@ -2,7 +2,6 @@
 import {SyntheticEvent, useEffect, useState} from "react";
 import {api} from "@/utils/api";
 import {UploadType} from "@/utils/baseTypes";
-import "@/styles/styles.scss"
 import {FilePageContent} from "@/components/files/FilePageContent";
 
 export interface GetUploadFormData {

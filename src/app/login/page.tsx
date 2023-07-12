@@ -1,5 +1,4 @@
 "use client";
-import '@/styles/styles.scss'
 import {SyntheticEvent, useState} from "react";
 import Textfield from "@/components/Textfield";
 import {mdiAccount, mdiClose, mdiLock} from "@mdi/js";
