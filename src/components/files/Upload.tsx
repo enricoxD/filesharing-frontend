@@ -56,7 +56,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
 
     useEffect(() => {
         requestAuthorInformation()
-    }, [requestAuthorInformation])
+    }, [])
 
     return (
         <div className={"upload"}>
