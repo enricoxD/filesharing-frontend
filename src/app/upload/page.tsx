@@ -23,7 +23,7 @@ enum DeleteIn {
     THREE_MONTH = "3 Months",
 }
 
-export default function File() {
+export default function Upload() {
     const [uploadData, setUploadData] = useState<UploadData>({
         title: "",
         password: "",

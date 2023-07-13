@@ -13,7 +13,7 @@ interface FormData {
   email: string;
 }
 
-export default function Page() {
+export default function SignUp() {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     password: '',
