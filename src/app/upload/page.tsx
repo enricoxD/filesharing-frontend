@@ -147,7 +147,7 @@ export default function File() {
             }
             <div className={"section submit-button"}>
                 {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <Button layout={"filled"} disabled={uploadData.files.length == 0 || uploadStarted} onClick={uploadFiles}>
+                <Button layout={"gradient"} disabled={uploadData.files.length == 0 || uploadStarted} onClick={uploadFiles}>
                     <p>{uploadStarted ? "Upload started" : "Upload"}</p>
                 </Button>
             </div>

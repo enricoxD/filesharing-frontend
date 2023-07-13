@@ -81,7 +81,7 @@ export default function Login() {
                 />
               </div>
 
-              <Button layout={"filled"} disabled={false} onClick={handleLogin}>
+              <Button layout={"gradient"} disabled={false} onClick={handleLogin}>
                 <p>Login</p>
               </Button>
               <Link href={"/hallo/"} className={"center"}>

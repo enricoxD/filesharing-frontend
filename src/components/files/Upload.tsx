@@ -66,7 +66,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
                     <div className={"author"}>
                         <Image className={"avatar"} src={"https://dummyimage.com/128/000/fff.png&text=Yeah"} alt={author} width={64} height={64}/>
                         <div className={"information"}>
-                            <p className={"username"}>{authorInformation?.username || 'Unknown'}</p>
+                            <p className={"username"}>{authorInformation?.name || 'Unknown'}</p>
                             {authorInformation?.lastSeen && <p className={"last-seen"}>Online</p>}
                         </div>
                     </div>
@@ -80,7 +80,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
                 actionCallback={(file) => requestDownload(file)}
             />
             <div className={"section is-flex h-center-content"}>
-                <Button onClick={requestPackageDownload} layout={"filled"} className={"desktop-one-third"} disabled={disableDownloadAllButton}>
+                <Button onClick={requestPackageDownload} layout={"gradient"} className={"desktop-one-third"} disabled={disableDownloadAllButton}>
                     <p>{disableDownloadAllButton ? "Download started" : "Download All"}</p>
                 </Button>
             </div>

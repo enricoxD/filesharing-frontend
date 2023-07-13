@@ -21,7 +21,7 @@ export const RequestPassword = (props: {
                 isRequired={true}
                 icon={mdiLock}
             />
-            <Button onClick={props.onSubmit} layout={"filled"} className={"desktop-one-third"}>
+            <Button onClick={props.onSubmit} layout={"gradient"} className={"desktop-one-third"}>
                 <p>Submit Password</p>
             </Button>
         </div>

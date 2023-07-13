@@ -1,18 +1,17 @@
 export type UserType = {
     id: string;
-    username: string;
+    name: string;
     email: string;
     password: string;
     createdAt: LocalDateTime;
     lastSeen: LocalDateTime;
-    avatar: string | null;
     authToken: string | null;
     emailVerified: boolean;
-    apiKet: string | null;
+    apiKey: string | null;
 };
 
 export type AuthorInformation = {
-    username: string;
+    name: string;
     lastSeen: LocalDateTime;
 }
 

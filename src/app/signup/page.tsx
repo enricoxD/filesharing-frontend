@@ -91,7 +91,7 @@ export default function Page() {
                 />
               </div>
 
-              <Button layout={"filled"} disabled={false} onClick={handleSignup}>
+              <Button layout={"gradient"} disabled={false} onClick={handleSignup}>
                 <p>Signup</p>
               </Button>
 
