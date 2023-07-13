@@ -1,15 +1,16 @@
 .auth-page {
-  margin-top: 100px;
-  position: relative;
-  height: calc(100vh - 100px);
-  width: 100%;
   display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  overflow-x: hidden;
+  align-items: center;
+
+  @include mobile {
+    min-height: calc(100vw);
+  }
 
   .authcard {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 480px;
     min-height: 80vh;
     height: auto;

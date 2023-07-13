@@ -57,8 +57,7 @@ export default function Login() {
   };
 
   return (
-      <main className={"auth-page"}>
-        <div className={"loginsection container"}>
+      <main className={"auth-page container"}>
           <div className={"authcard"}>
             <h1>Login</h1>
             <div className={"content-frame"}>
@@ -107,7 +106,6 @@ export default function Login() {
               </div>
             </div>
           </div>
-        </div>
       </main>
   )
 }
