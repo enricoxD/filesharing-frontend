@@ -1,12 +1,14 @@
+"use client"
 import {BASE_URL} from "@/utils/api";
 import Icon from "@mdi/react";
 import React from "react";
 import {
+    mdiAccountAlert,
     mdiAccountCircleOutline, mdiAccountMultiple,
     mdiFile,
-    mdiNaturePeople,
     mdiUpload
 } from "@mdi/js";
+import {useCurrentUser} from "@/hooks/getCurrentUser";
 
 interface NavBarItemProps {
     name: string;
@@ -15,24 +17,30 @@ interface NavBarItemProps {
     className?: string;
 }
 
+const NavBarItem = ({name, icon, path, className}: NavBarItemProps) => {
+    return (
+        <a className={`navbar-item ${className}`} href={`${BASE_URL}/${path}`}>
+            <div className={"icon-wrapper"}>
+                <Icon path={icon} className={"icon"}/>
+            </div>
+            <p>{name}</p>
+        </a>
+    )
+}
+
 export const NavBar = () => {
-    const NavBarItem = ({name, icon, path, className}: NavBarItemProps) => {
-        return (
-            <a className={`navbar-item ${className}`} href={`${BASE_URL}/${path}`}>
-                <div className={"icon-wrapper"}>
-                    <Icon path={icon} className={"icon"}/>
-                </div>
-                <p>{name}</p>
-            </a>
-        )
-    }
+    const user = useCurrentUser()
 
     return (
         <nav className={"navbar"}>
-            <NavBarItem path={"/"} name={"Filesharing"} icon={mdiFile} />
-            <NavBarItem path={"/upload"} name={"Upload"} icon={mdiUpload} />
-            <NavBarItem path={"/people"} name={"People"} icon={mdiAccountMultiple} />
-            <NavBarItem path={"/signup"} name={"Sign Up"} icon={mdiAccountCircleOutline} />
+            <NavBarItem path={"/"} name={"Filesharing"} icon={mdiFile}/>
+            <NavBarItem path={"/upload"} name={"Upload"} icon={mdiUpload}/>
+            <NavBarItem path={"/people"} name={"People"} icon={mdiAccountMultiple}/>
+            {user ?
+                <NavBarItem path={`/user/${user.id}`} name={user.name} icon={mdiAccountAlert}/>
+                :
+                <NavBarItem path={"/signup"} name={"Sign Up"} icon={mdiAccountCircleOutline}/>
+            }
         </nav>
     )
 }
