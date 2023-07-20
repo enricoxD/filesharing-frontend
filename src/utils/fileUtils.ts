@@ -2,7 +2,7 @@ import {FileUploadType} from "@/utils/baseTypes";
 
 export class FileUtils {
   static getName(file: File | FileUploadType): string {
-      return file.name.substring(0, file.name.lastIndexOf("."));
+    return file.name.substring(0, file.name.lastIndexOf("."));
 
   }
 

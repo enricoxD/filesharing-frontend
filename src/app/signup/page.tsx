@@ -25,23 +25,18 @@ export default function SignUp() {
   const handleSignup = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    try {
-      const response = await api.post('/auth/register', formData, {
-        withCredentials: true
-      });
-
-      if (response.data.data) {
-        process.env.BASE_URL && window.location.replace(process.env.BASE_URL);
-        return
-      }
-
-      if (response.data.message) {
-        setExceptionMessage(response.data.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    api.post('/auth/register', formData)
+      .then((response) => {
+        if (response.data.exception) {
+          setExceptionMessage(response.data.exception)
+          return
+        }
+        process.env.BASE_URL && window.location.replace(process.env.BASE_URL)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   const setExceptionMessage = (message: String) => {
     setException(message);
@@ -61,59 +56,59 @@ export default function SignUp() {
   };
 
   return (
-      <main className={"auth-page container"}>
-          <div className={"authcard"}>
-            <h1>Signup</h1>
-            <div className={"content-frame"}>
-              <div className={"credentials"}>
-                <Textfield
-                    placeholder={"Username"}
-                    name={"username"}
-                    onChange={handleTextfieldChange}
-                    isRequired={true}
-                    icon={mdiAccount}
-                />
-                <Textfield
-                    placeholder={"E-Mail"}
-                    name={"email"}
-                    onChange={handleTextfieldChange}
-                    isRequired={true}
-                    icon={mdiEmail}
-                />
-                <Textfield
-                    placeholder={"Password"}
-                    name={"password"}
-                    password
-                    onChange={handleTextfieldChange}
-                    isRequired={true}
-                    icon={mdiLock}
-                />
-              </div>
+    <main className={"auth-page container"}>
+      <div className={"authcard"}>
+        <h1>Signup</h1>
+        <div className={"content-frame"}>
+          <div className={"credentials"}>
+            <Textfield
+              placeholder={"Username"}
+              name={"username"}
+              onChange={handleTextfieldChange}
+              isRequired={true}
+              icon={mdiAccount}
+            />
+            <Textfield
+              placeholder={"E-Mail"}
+              name={"email"}
+              onChange={handleTextfieldChange}
+              isRequired={true}
+              icon={mdiEmail}
+            />
+            <Textfield
+              placeholder={"Password"}
+              name={"password"}
+              password
+              onChange={handleTextfieldChange}
+              isRequired={true}
+              icon={mdiLock}
+            />
+          </div>
 
-              <Button layout={"gradient"} disabled={false} onClick={handleSignup}>
-                <p>Signup</p>
-              </Button>
+          <Button layout={"gradient"} disabled={false} onClick={handleSignup}>
+            <p>Signup</p>
+          </Button>
 
-              <div className={"sso"}>
-                <span className={"divider"}>Or</span>
-                <div className={"provider"}>
-                  <Link href={{/*TODO*/}}>
-                    <Image src={"/google.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
-                  </Link>
-                  <Link href={{/*TODO*/}}>
-                    <Image src={"/github.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
-                  </Link>
-                </div>
-              </div>
-              <div className={"information"}>
-                {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
-                <div className={"links"}>
-                  <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link></p>
-                  <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
-                </div>
-              </div>
+          <div className={"sso"}>
+            <span className={"divider"}>Or</span>
+            <div className={"provider"}>
+              <Link href={{/*TODO*/}}>
+                <Image src={"/google.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
+              </Link>
+              <Link href={{/*TODO*/}}>
+                <Image src={"/github.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
+              </Link>
             </div>
+          </div>
+          <div className={"information"}>
+            {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
+            <div className={"links"}>
+              <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link></p>
+              <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>
+            </div>
+          </div>
         </div>
-      </main>
+      </div>
+    </main>
   )
 }

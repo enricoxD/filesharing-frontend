@@ -1,0 +1,107 @@
+.user-settings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1rem;
+  gap: 1.5rem;
+  justify-content: center;
+
+  .textfield {
+    background: $background-variant;
+  }
+
+  @include tablet {
+    padding: 2rem;
+  }
+
+  .label {
+    padding-left: 0.5rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .setting, .divider, .avatar-setting {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .avatar {
+      border-radius: 6px;
+    }
+
+    @include desktop {
+      &.half {
+        width: calc(50% - 0.75rem);
+      }
+    }
+  }
+
+  .avatar-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    .upload-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 6px;
+      border: 1px dashed $outline;
+      gap: 1rem;
+      padding-right: 0.5rem;
+      flex-basis: 100%;
+    }
+
+    @include tablet {
+      flex-direction: row;
+      gap: 1.5rem;
+
+      .upload-box {
+        flex-basis: 75%;
+      }
+
+      .button {
+        flex-basis: 25%;
+        height: 75%;
+      }
+    }
+  }
+
+  .confirmation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.15rem;
+
+    .exception {
+      background: rgba($red-400, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      color: $red-500;
+      font-size: 1rem;
+      margin-top: 0.6rem;
+      margin-bottom: 0.6rem;
+      transition: all 0.35s ease-in-out;
+      text-align: center;
+
+      &.shown {
+        opacity: 1;
+      }
+
+      &.hidden {
+        opacity: 0;
+        transform: scale(0.65);
+      }
+    }
+
+    @include desktop {
+      width: 50%;
+    }
+
+    .button {
+      align-self: center;
+      margin-bottom: 5rem;
+    }
+  }
+}

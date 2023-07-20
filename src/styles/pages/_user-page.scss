@@ -1,0 +1,136 @@
+.user-page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .user-information {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    background-color: $surface;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 2rem;
+    box-shadow: -6px 6px 4px 0 rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: space-between;
+
+    .greeting {
+      font-size: 64px;
+
+      .username, .wave {
+        font-size: 64px;
+      }
+    }
+
+    .button {
+      width: 16%;
+      height: 2.5rem;
+
+      @include tablet-only {
+        width: 20%;
+      }
+    }
+
+      /*.wave {
+        @include mobile {
+          display: none;
+        }
+      }*/
+    @include mobile {
+      flex-direction: column;
+      padding: 1rem;
+
+      .greeting {
+        flex-basis: 100%;
+        font-size: 48px;
+
+        .username, .wave {
+          font-size: 48px;
+        }
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  }
+
+  .body {
+    width: 100%;
+    background-color: $surface;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: -6px 6px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .tab-selection {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      padding-inline: 1rem;
+      margin-bottom: 0.5rem;
+
+      @include tablet-only {
+        width: 75%;
+      }
+
+      @include desktop {
+        width: 50%;
+      }
+
+      .tab {
+        flex: 1 1 0px;
+        height: max-content;
+        outline: 2px solid $outline;
+        border-top: 0;
+        text-align: center;
+        padding: 0.75rem;
+        background-color: $background-variant;
+        transition: background-color 0.35s ease-in-out;
+
+        &:first-of-type {
+          border-bottom-left-radius: 6px;
+        }
+
+        &:last-of-type {
+          border-bottom-right-radius: 6px;
+        }
+
+        &:hover {
+          background-color: bulmaLighten($background-variant, 3%);
+        }
+
+        &.active {
+          background-color: bulmaLighten($surface-mixed-100, 5%);
+
+          &:hover {
+            background-color: bulmaLighten($surface-mixed-100, 8%);
+          }
+        }
+      }
+    }
+
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      background-color: $surface;
+      transition: height 0.6s ease-in-out;
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        transform: translateX(120%);
+        transition: 0.6s ease-in-out;
+
+        &.selected {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+}

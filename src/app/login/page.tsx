@@ -22,22 +22,19 @@ export default function Login() {
 
   const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
-    try {
-      const response = await api.post('/auth/login', formData, {
-        withCredentials: true
-      });
-      if (response.data.data) {
-        process.env.BASE_URL && window.location.replace(process.env.BASE_URL);
-        return
-      }
 
-      if (response.data.message) {
-        setExceptionMessage(response.data.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    api.post('/auth/login', formData)
+      .then((response) => {
+        if (response.data.exception) {
+          setExceptionMessage(response.data.exception)
+          return
+        }
+        process.env.BASE_URL && window.location.replace(process.env.BASE_URL)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   const setExceptionMessage = (message: String) => {
     setException(message);

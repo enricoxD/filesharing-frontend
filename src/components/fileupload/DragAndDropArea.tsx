@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useRef} from "react";
 import Icon from "@mdi/react";
 import {mdiFolderZip} from "@mdi/js";
 
@@ -42,7 +42,7 @@ const DragAndDropArea: React.FC<DragAndDropProps> = (props) => {
       <p className="title gradient-text">Drag and drop a file here</p>
       <p className="subtitle">or click the area to select a file</p>
       <p className="max-upload">You may upload up to 3 GB</p>
-      <Icon path={mdiFolderZip} className={"icon"} />
+      <Icon path={mdiFolderZip} className={"icon"}/>
 
       <input
         ref={inputRef}

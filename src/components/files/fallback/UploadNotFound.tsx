@@ -1,14 +1,14 @@
 import Lottie, {LottieRefCurrentProps} from "lottie-react"
-import loadingAnimationData from "@/assets/lottie/loading.json"
+import notFoundAnimationData from "@/assets/lottie/not_found.json"
 import {useRef, useState} from "react";
 
-export const Loading = () => {
+export const UploadNotFound = () => {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
   const [animationDirection, setAnimationDirection] = useState<1 | -1>(1)
 
   return <div className={"fallback section"}>
-    <h2>Loading...</h2>
-    <p>Fetching your requested data, please wait.</p>
+    <h2>Not Found</h2>
+    <p>The requested data could not be found.</p>
     <Lottie
       id={"lottie"}
       onComplete={() => {
@@ -17,10 +17,10 @@ export const Loading = () => {
           lottieRef.current?.setDirection(newDirection);
           lottieRef.current?.play();
           setAnimationDirection(newDirection)
-        }, 350)
+        }, 750)
       }}
       lottieRef={lottieRef}
-      animationData={loadingAnimationData}
+      animationData={notFoundAnimationData}
       loop={false}
     />
   </div>

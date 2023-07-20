@@ -9,6 +9,7 @@
 @import "bulma/sass/elements/table";
 @import "src/styles/pages/auth-page";
 @import "src/styles/pages/upload-page";
+@import "src/styles/pages/user-page";
 
 @import "src/styles/components/textfield";
 @import "src/styles/components/button";
@@ -17,3 +18,5 @@
 @import "src/styles/components/files/file-list";
 @import "src/styles/components/files/fallback";
 @import "src/styles/components/fileupload/drag-and-drop";
+@import "src/styles/components/user/user-settings";
+@import "src/styles/components/user/user-uploads";

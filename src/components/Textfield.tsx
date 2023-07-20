@@ -1,15 +1,16 @@
-import React, {ComponentProps, SyntheticEvent, useState} from "react";
+import React, {SyntheticEvent, useState} from "react";
 import Icon from '@mdi/react';
 import {mdiEye, mdiEyeOff} from '@mdi/js';
 
 
-interface TextfieldProps extends ComponentProps<"input"> {
+interface TextfieldProps {
   icon?: string;
   name?: string;
   placeholder?: string;
   password?: boolean;
   onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
+  className?: string;
 }
 
 const Textfield: React.FC<TextfieldProps> = (props) => {
@@ -20,7 +21,6 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
     password,
     onChange,
     isRequired,
-    children,
     className,
     ...attributes
   } = props;
@@ -34,14 +34,14 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
         name={name}
         className={icon ? "input-with-icon" : "input"}
         placeholder={placeholder}
-        onChange={(event) => onChange && onChange(event) }
+        onChange={(event) => onChange && onChange(event)}
       />
       {password && (
         <a className={`toggle-password-icon`} onClick={() => setShowInput(!showInput)}>
-            {<Icon
-                path={showInput ? mdiEyeOff : mdiEye}
-                className={showInput ? 'shown' : 'hidden'}
-            />}
+          {<Icon
+            path={showInput ? mdiEyeOff : mdiEye}
+            className={showInput ? 'shown' : 'hidden'}
+          />}
         </a>
       )}
     </div>
