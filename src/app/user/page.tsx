@@ -6,6 +6,7 @@ import {UserSettings} from "@/components/user/UserSettings";
 import {UserUploads} from "@/components/user/UserUploads";
 import {Button} from "@/components/Button";
 import {api} from "@/utils/api";
+import {UploadWithoutFilesType} from "@/utils/baseTypes";
 
 export default function User() {
   const user = useCurrentUser()
@@ -14,6 +15,9 @@ export default function User() {
   const possibleTabs = ["Uploads", "Shared", "Settings"]
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const [sliderHeight, setSliderHeight] = useState(0)
+
+  const [ownUploads, setOwnUploads] = useState<UploadWithoutFilesType[]>()
+  const [sharedUploads, setSharedUploads] = useState<UploadWithoutFilesType[]>()
 
   const selectTab = (index: number) => {
     setCurrentTab(index)
@@ -37,7 +41,15 @@ export default function User() {
       const slideHeight = (slides[currentTab] as HTMLElement).offsetHeight;
       setSliderHeight(slideHeight)
     }
-  }, [shownTab, user]);
+  }, [shownTab, user, ownUploads, sharedUploads]);
+
+  useEffect(() => {
+    if (!user) return
+    api.post('/user/get-uploads', { id: user?.id })
+      .then((response) => {
+        setOwnUploads(response.data.data)
+      })
+  }, [user])
 
   return (
     <main className={"user-page container section"}>
@@ -68,10 +80,10 @@ export default function User() {
         {user &&
             <div className="slider-wrapper" ref={wrapperRef} style={{height: sliderHeight}}>
                 <div className={`slide ${currentTab == 0 ? "selected" : ""}`}>
-                  {shownTab == 0 && <UserUploads user={user} type={"own"}/>}
+                  {shownTab == 0 && ownUploads && <UserUploads uploads={ownUploads} type={"own"}/>}
                 </div>
                 <div className={`slide ${currentTab == 1 ? "selected" : ""}`}>
-                  {shownTab == 1 && <UserUploads user={user} type={"shared"}/>}
+                  {/*{shownTab == 1 && <UserUploads user={user} type={"shared"}/>}*/}
                 </div>
                 <div className={`slide ${currentTab == 2 ? "selected" : ""}`}>
                   {shownTab == 2 && <UserSettings user={user}/>}

@@ -1,6 +1,6 @@
 import {AuthorInformation, FileUploadType, UploadType} from "@/utils/baseTypes";
 import Image from "next/image";
-import {capitalize} from "@/utils/stringUtils";
+import {capitalize, dateAsString} from "@/utils/stringUtils";
 import {FileList} from "@/components/fileupload/FileList";
 import {mdiDownload} from "@mdi/js";
 import {Button} from "@/components/Button";
@@ -10,7 +10,6 @@ import {useEffect, useState} from "react";
 
 export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: GetUploadFormData }) => {
   const {author, title, uploadedAt, files} = upload;
-  const uploadDate = `${uploadedAt.dayOfMonth} ${capitalize(uploadedAt.month)} ${uploadedAt.year}`
   const [authorInformation, setAuthorInformation] = useState<AuthorInformation>();
   const [disableDownloadAllButton, setDisableDownloadAllButton] = useState(false)
 
@@ -71,7 +70,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
               {authorInformation?.lastSeen && <p className={"last-seen"}>Online</p>}
             </div>
           </div>
-          <p className={"upload-date"}>{uploadDate}</p>
+          <p className={"upload-date"}>{dateAsString(uploadedAt.date)}</p>
         </div>
       </div>
       <FileList
