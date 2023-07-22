@@ -82,11 +82,11 @@ export default function User() {
                 <div className={`slide ${currentTab == 0 ? "selected" : ""}`}>
                   {shownTab == 0 && ownUploads && <UserUploads uploads={ownUploads} type={"own"}/>}
                 </div>
+                {/*<div className={`slide ${currentTab == 1 ? "selected" : ""}`}>
+                  {shownTab == 1 && <UserUploads user={user} type={"shared"}/>}
+                </div>*/}
                 <div className={`slide ${currentTab == 1 ? "selected" : ""}`}>
-                  {/*{shownTab == 1 && <UserUploads user={user} type={"shared"}/>}*/}
-                </div>
-                <div className={`slide ${currentTab == 2 ? "selected" : ""}`}>
-                  {shownTab == 2 && <UserSettings user={user}/>}
+                  {shownTab == 1 && <UserSettings user={user}/>}
                 </div>
             </div>
         }
