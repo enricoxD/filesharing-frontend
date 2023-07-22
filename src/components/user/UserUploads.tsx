@@ -27,9 +27,7 @@ const UploadGroup = ({dateString, type, uploads}: {
     <div className={"upload-group"}>
       <p className={"date"}>{dateString}</p>
       {uploads.map((upload, index) => {
-        return <>
-          <UploadEntry upload={upload} type={type} key={`upload-${dateString}-${index}`}/>
-        </>
+        return <UploadEntry upload={upload} type={type} key={`upload-${dateString}-${index}`}/>
       })}
     </div>
   )
