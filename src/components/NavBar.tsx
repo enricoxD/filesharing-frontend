@@ -36,7 +36,7 @@ export const NavBar = () => {
     <nav className={"navbar"}>
       <NavBarItem path={"/"} name={"Filesharing"} icon={mdiFile}/>
       <NavBarItem path={"/upload"} name={"Upload"} icon={mdiUpload}/>
-      <NavBarItem path={"/people"} name={"People"} icon={mdiAccountMultiple}/>
+      {/*<NavBarItem path={"/people"} name={"People"} icon={mdiAccountMultiple}/>*/}
       {user ?
         <NavBarItem path={`/user`} name={user.name} icon={mdiAccountAlert}/>
         :

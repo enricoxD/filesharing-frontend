@@ -12,7 +12,7 @@ export default function User() {
   const user = useCurrentUser()
   const [currentTab, setCurrentTab] = useState(0)
   const [shownTab, setShownTab] = useState(0)
-  const possibleTabs = ["Uploads", "Shared", "Settings"]
+  const possibleTabs = ["Uploads", /*"Shared",*/ "Settings"]
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const [sliderHeight, setSliderHeight] = useState(0)
 
