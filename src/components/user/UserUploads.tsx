@@ -55,10 +55,18 @@ export const UserUploads = ({uploads, type}: { uploads: UploadListEntry[], type:
         </div>
       </div>
 
-      {Object.keys(groupedUploads).map((key) => {
-        const uploads = groupedUploads[key]
-        return <UploadGroup dateString={key} type={type} uploads={uploads} key={key}/>
-      })}
+      {uploads.length == 0 ?
+        <div className={"no-uploads"}>
+          <p>No Uploads founds</p>
+        </div>
+        :
+        <>
+          {Object.keys(groupedUploads).map((key) => {
+            const uploads = groupedUploads[key]
+            return <UploadGroup dateString={key} type={type} uploads={uploads} key={key}/>
+          })}
+        </>
+      }
     </div>
   )
 }
