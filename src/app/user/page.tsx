@@ -6,7 +6,7 @@ import {UserSettings} from "@/components/user/UserSettings";
 import {UserUploads} from "@/components/user/UserUploads";
 import {Button} from "@/components/Button";
 import {api} from "@/utils/api";
-import {UploadWithoutFilesType} from "@/utils/baseTypes";
+import {UploadListEntry} from "@/utils/baseTypes";
 
 export default function User() {
   const user = useCurrentUser()
@@ -16,8 +16,8 @@ export default function User() {
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const [sliderHeight, setSliderHeight] = useState(0)
 
-  const [ownUploads, setOwnUploads] = useState<UploadWithoutFilesType[]>()
-  const [sharedUploads, setSharedUploads] = useState<UploadWithoutFilesType[]>()
+  const [ownUploads, setOwnUploads] = useState<UploadListEntry[]>()
+  const [sharedUploads, setSharedUploads] = useState<UploadListEntry[]>()
 
   const selectTab = (index: number) => {
     setCurrentTab(index)

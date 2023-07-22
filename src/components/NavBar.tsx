@@ -9,6 +9,7 @@ import {
   mdiUpload
 } from "@mdi/js";
 import {useCurrentUser} from "@/hooks/getCurrentUser";
+import Link from "next/link";
 
 interface NavBarItemProps {
   name: string;
@@ -19,12 +20,12 @@ interface NavBarItemProps {
 
 const NavBarItem = ({name, icon, path, className}: NavBarItemProps) => {
   return (
-    <a className={`navbar-item ${className}`} href={`${BASE_URL}/${path}`}>
+    <Link className={`navbar-item ${className}`} href={`${BASE_URL}/${path}`}>
       <div className={"icon-wrapper"}>
         <Icon path={icon} className={"icon"}/>
       </div>
       <p>{name}</p>
-    </a>
+    </Link>
   )
 }
 

@@ -55,7 +55,7 @@ export default function Upload() {
           setExceptionMessage(response.data.exception)
           return
         }
-        process.env.BASE_URL && window.location.replace(`${process.env.BASE_URL}/file/${response.data.data}`)
+        process.env.BASE_URL && window.location.assign(`${process.env.BASE_URL}/file/${response.data.data}`)
       })
       .catch((error) => {
         console.log(error)

@@ -16,9 +16,10 @@ export type AuthorInformation = {
   lastSeen: LocalDateTime;
 }
 
-export type UploadWithoutFilesType = {
+export type UploadListEntry = {
   id: string
   author: string;
+  authorName: string;
   title: string;
   uploadedAt: LocalDateTime;
   size: number;
