@@ -78,6 +78,16 @@ select {
   display: flex;
 }
 
+.is-flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.33rem;
+
+  &.h-center-content {
+    align-items: center;
+  }
+}
+
 .desktop-one-third {
   @include desktop {
     width: 33%;
