@@ -45,22 +45,21 @@ export const UserUploads = ({uploads, type}: { uploads: UploadListEntry[], type:
 
   return (
     <div className={"user-uploads"}>
-      <div className={"upload-group dummy"}>
-        <div className={"upload-entry"}>
-          <p className={"title"}>Title</p>
-          <p className={"author"}>Author</p>
-          <p className={"time"}>Time</p>
-          <p className={"file-amount"}>Files</p>
-          <p className={"file-size"}>Size</p>
-        </div>
-      </div>
-
       {uploads.length == 0 ?
         <div className={"no-uploads"}>
           <p>No Uploads founds</p>
         </div>
         :
         <>
+          <div className={"upload-group dummy"}>
+            <div className={"upload-entry"}>
+              <p className={"title"}>Title</p>
+              <p className={"author"}>Author</p>
+              <p className={"time"}>Time</p>
+              <p className={"file-amount"}>Files</p>
+              <p className={"file-size"}>Size</p>
+            </div>
+          </div>
           {Object.keys(groupedUploads).map((key) => {
             const uploads = groupedUploads[key]
             return <UploadGroup dateString={key} type={type} uploads={uploads} key={key}/>
