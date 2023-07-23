@@ -1,7 +1,7 @@
 import React, {ComponentProps, SyntheticEvent} from "react";
 import Icon from "@mdi/react";
 
-export type ButtonTypes = "gradient" | "filled";
+export type ButtonTypes = "gradient" | "filled" | "filled-red";
 
 interface ButtonProps extends ComponentProps<"button"> {
   onClick: (event: SyntheticEvent) => void;
