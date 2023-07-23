@@ -21,13 +21,14 @@ enum DeleteIn {
   TWO_WEEKS = "2 Weeks",
   ONE_MONTH = "1 Month",
   THREE_MONTH = "3 Months",
+  NEVER = "Never"
 }
 
 export default function Upload() {
   const [uploadData, setUploadData] = useState<UploadData>({
     title: "",
     password: "",
-    deleteIn: DeleteIn.ONE_WEEK,
+    deleteIn: DeleteIn.NEVER,
     files: []
   });
   const [showException, setShowException] = useState<boolean>(false);
@@ -35,12 +36,30 @@ export default function Upload() {
   const [uploadStarted, setUploadStarted] = useState(false)
   const [progress, setProgress] = useState(0);
 
+  function deleteInAsSimpleString() {
+    switch (uploadData.deleteIn) {
+      case "1 Day":
+        return "ONE_DAY"
+      case "1 Week":
+        return "ONE_WEEK"
+      case "2 Weeks":
+        return "TWO_WEEKS"
+      case "1 Month":
+        return "ONE_MONTH"
+      case "3 Months":
+        return "THREE_MONTH"
+      case "Never":
+        return "NEVER"
+    }
+    return "NEVER"
+  }
+
   const uploadFiles = async () => {
     setUploadStarted(true)
     const formData = new FormData();
     formData.append("title", uploadData.title)
     formData.append("password", uploadData.password)
-    formData.append("deleteIn", uploadData.deleteIn)
+    formData.append("deleteIn", deleteInAsSimpleString())
     uploadData.files.forEach((file, index) => {
       formData.append(`file`, file);
     });
@@ -126,16 +145,16 @@ export default function Upload() {
           isRequired={true}
           icon={mdiLock}
         />
-        {/* TODO <div className={"delete-in-selection"}>
-                    <p>Delete In</p>
-                    <select>
-                        {Object.entries(DeleteIn).map(([key, value]) => {
-                            return <option value={key} key={key} onClick={() => setDeleteIn(key)}>
-                                {value}
-                            </option>
-                        })}
-                    </select>
-                </div>*/}
+        <div className={"delete-in-selection"}>
+            <p>Delete In</p>
+            <select>
+                {Object.entries(DeleteIn).map(([key, value]) => {
+                    return <option value={key} key={key} onClick={() => setDeleteIn(key)}>
+                        {value}
+                    </option>
+                })}
+            </select>
+        </div>
       </form>
       {uploadStarted &&
           <div className={"upload-progress"}>

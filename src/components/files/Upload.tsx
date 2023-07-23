@@ -7,11 +7,13 @@ import {Button} from "@/components/Button";
 import {GetUploadFormData} from "@/app/file/[...slug]/page";
 import {api} from "@/utils/api";
 import {useEffect, useState} from "react";
+import {useCurrentUser} from "@/hooks/getCurrentUser";
 
 export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: GetUploadFormData }) => {
-  const {author, title, uploadedAt, files} = upload;
-  const [authorInformation, setAuthorInformation] = useState<AuthorInformation>();
+  const {author, title, uploadedAt, files} = upload
+  const [authorInformation, setAuthorInformation] = useState<AuthorInformation>()
   const [disableDownloadAllButton, setDisableDownloadAllButton] = useState(false)
+  const user = useCurrentUser()
 
   const requestAuthorInformation = async () => {
     api.post("/file/authorinformation", uploadData)
@@ -29,7 +31,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
       responseType: "blob"
     }).then((response) => {
       download(response.data, file.name)
-    });
+    })
   }
 
   const requestPackageDownload = async () => {
@@ -40,7 +42,15 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
       responseType: "blob"
     }).then((response) => {
       download(response.data, `${title.toLowerCase().replaceAll(' ', '_')}-bundle.zip`)
-    });
+    })
+  }
+
+  const requestDeletion = async () => {
+    api.post("/file/delete", {
+      ...uploadData
+    }).then((response) => {
+      process.env.BASE_URL && window.location.replace(process.env.BASE_URL)
+    })
   }
 
   const download = (content: string, fileName: string) => {
@@ -85,6 +95,16 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
           <p>{disableDownloadAllButton ? "Download started" : "Download All"}</p>
         </Button>
       </div>
+
+      { user && (user.id == author || user.role == "ADMIN") &&
+          <div className={"is-flex-column h-center-content"}>
+            <p>Content Moderation</p>
+            <Button onClick={requestDeletion} layout={"filled-red"} className={"desktop-one-third"}
+                    disabled={disableDownloadAllButton}>
+              <p>Delete Upload</p>
+            </Button>
+          </div>
+      }
     </div>
   )
 }
