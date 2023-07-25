@@ -10,19 +10,23 @@ import {
 } from "@mdi/js";
 import {useCurrentUser} from "@/hooks/getCurrentUser";
 import Link from "next/link";
+import Image from "next/image";
 
 interface NavBarItemProps {
   name: string;
-  icon: string;
+  icon?: string;
+  image?: string;
   path: string;
   className?: string;
 }
 
-const NavBarItem = ({name, icon, path, className}: NavBarItemProps) => {
+const NavBarItem = ({name, icon, image, path, className}: NavBarItemProps) => {
   return (
     <Link className={`navbar-item ${className}`} href={`${BASE_URL}/${path}`}>
       <div className={"icon-wrapper"}>
-        <Icon path={icon} className={"icon"}/>
+        { icon && <Icon path={icon} className={"icon"}/>}
+        { image && <Image className={"image"} src={image} alt={"profile"}
+                          width={48} height={48}/>}
       </div>
       <p>{name}</p>
     </Link>
@@ -38,7 +42,7 @@ export const NavBar = () => {
       <NavBarItem path={"/upload"} name={"Upload"} icon={mdiUpload}/>
       {/*<NavBarItem path={"/people"} name={"People"} icon={mdiAccountMultiple}/>*/}
       {user ?
-        <NavBarItem path={`/user`} name={user.name} icon={mdiAccountAlert}/>
+        <NavBarItem path={`/user`} name={user.name} image={`https://api.filesharing.enricoe.de/user/avatar/${user.id}`} />
         :
         <NavBarItem path={"/signup"} name={"Sign Up"} icon={mdiAccountCircleOutline}/>
       }
