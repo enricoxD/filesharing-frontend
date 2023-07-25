@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {UserType} from "@/utils/baseTypes";
 import {api} from "@/utils/api";
 import {useStickyState} from "@/hooks/useStickyState";
