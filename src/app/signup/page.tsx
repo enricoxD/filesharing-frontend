@@ -19,8 +19,8 @@ export default function SignUp() {
     password: '',
     email: '',
   });
-  const [showException, setShowException] = useState<boolean>(false);
-  const [exception, setException] = useState<String | false>(false);
+  const [showException, setShowException] = useState<boolean>(false)
+  const [exception, setException] = useState<string | false>(false)
 
   const handleSignup = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ export default function SignUp() {
       })
   }
 
-  const setExceptionMessage = (message: String) => {
+  const setExceptionMessage = (message: string) => {
     setException(message);
     setShowException(true);
     setTimeout(() => {
@@ -92,7 +92,7 @@ export default function SignUp() {
           <div className={"sso"}>
             <span className={"divider"}>Or</span>
             <div className={"provider"}>
-              <Link href={{/*TODO*/}}>
+              <Link href={"https://www.api.filesharing.enricoe.de/oauth/login"}>
                 <Image src={"/google.svg"} alt={"Github Single Sign On"} width="40" height="40"/>
               </Link>
               <Link href={{/*TODO*/}}>
@@ -101,7 +101,7 @@ export default function SignUp() {
             </div>
           </div>
           <div className={"information"}>
-            {<p className={`exception ${showException ? "shown" : "hidden"}`}>{exception}</p>}
+            {<p className={`exception ${showException ? "shown" : "hidden"}`} dangerouslySetInnerHTML={exception ? { __html: exception } : { __html: ""}}></p>}
             <div className={"links"}>
               <p className={"signup"}>Already have an account? <Link href={"/login"}>Login</Link></p>
               <Link href={"/terms"} className={"terms"}>Terms & Conditions</Link>

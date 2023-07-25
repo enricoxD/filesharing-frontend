@@ -81,7 +81,7 @@ export default function Upload() {
       })
   }
 
-  const setExceptionMessage = (message: String) => {
+  const setExceptionMessage = (message: string) => {
     setException(message);
     setShowException(true);
     setTimeout(() => {

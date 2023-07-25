@@ -73,7 +73,7 @@ export const UserSettings = ({user}: { user: UserType }) => {
       })
   }
 
-  const setExceptionMessage = (message: String) => {
+  const setExceptionMessage = (message: string) => {
     setException(message);
     setShowException(true);
     setTimeout(() => {

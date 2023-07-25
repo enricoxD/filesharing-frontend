@@ -111,6 +111,27 @@
           margin-bottom: 8px;
           transition: all 0.35s ease-in-out;
 
+          ul {
+            list-style: none; /* Remove default bullets */
+            text-align: left;
+            @include tablet {
+              padding-left: 1rem;
+            }
+
+            li {
+              color: $red-400;
+
+              &::before {
+                content: "\2022";
+                color: $primary-900;
+                font-weight: bold;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+              }
+            }
+          }
+
           &.shown {
             opacity: 1;
           }
