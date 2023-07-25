@@ -64,6 +64,7 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
   }
 
   useEffect(() => {
+    document.title = `${upload.title} | Filesharing`
     requestAuthorInformation()
   }, [])
 

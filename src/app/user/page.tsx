@@ -36,6 +36,7 @@ export default function User() {
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const slides = wrapper?.getElementsByClassName("slide")
+    document.title = `${user?.name} | Filesharing`
 
     if (slides != null) {
       const slideHeight = (slides[currentTab] as HTMLElement).offsetHeight;
