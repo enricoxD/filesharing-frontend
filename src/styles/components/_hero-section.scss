@@ -1,0 +1,35 @@
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 5rem;
+  min-height: 66vh;
+  width: 100vw;
+  backdrop-filter: blur(15px);
+  background-color: $surface;
+  background-image:
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.75), $background),
+          radial-gradient(at 33% 56%, hsla(342,0%,0%,0.9) 0px, transparent 50%),
+          radial-gradient(at 54% 21%, hsla(250,82%,79%,1) 0px, transparent 50%),
+          radial-gradient(at 68% 29%, hsla(131,0%,0%,1) 0px, transparent 50%),
+          radial-gradient(at 1% 58%, hsla(295,86%,62%,1) 0px, transparent 50%),
+          radial-gradient(at 72% 18%, hsla(323,85%,71%,1) 0px, transparent 50%);
+
+
+    .title {
+      font-size: 64px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: $primary-900;
+      margin-bottom: 7.5rem;
+    }
+
+    .button {
+      padding: 1rem 1.25rem;
+    }
+  }

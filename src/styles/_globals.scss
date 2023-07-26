@@ -121,6 +121,10 @@ progress {
   justify-content: center;
 }
 
+.background-variant {
+  background: $background-variant;
+}
+
 .gradient-text {
   background: $primary-gradient;
   background-size: 400% 100%;

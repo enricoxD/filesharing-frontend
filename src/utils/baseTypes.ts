@@ -70,3 +70,9 @@ export type LocalDate = {
   month: string;
   monthNumber: number;
 }
+
+export type PublicInformationType = {
+  downloads: number;
+  uploads: number;
+  users: number;
+}
