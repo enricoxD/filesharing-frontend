@@ -32,7 +32,7 @@ export const Analytics = () => {
   }, [])
 
   return (
-    <section className={"analytics container section"}>
+    <section className={"analytics section"}>
       <AnalyticsEntry title={"Uploads"} icon={mdiUpload} state={information?.uploads || 0}/>
       <AnalyticsEntry title={"Users"} icon={mdiAccountGroup} state={information?.users || 0}/>
       <AnalyticsEntry title={"Downloads"} icon={mdiDownload} state={information?.downloads || 0}/>
