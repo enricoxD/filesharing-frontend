@@ -8,7 +8,7 @@ export default function Page() {
       <section className={"hero-section section is-flex-column"}>
           <h1 className={"title gradient-text"}>Filesharing</h1>
           <h2 className={"subtitle"}>Simple sharing, storing and managing</h2>
-          <Button href={"/upload"} layout={"gradient"}>
+          <Button href={"/upload"} layout={"filled"}>
             <p>Start Uploading!</p>
           </Button>
       </section>
