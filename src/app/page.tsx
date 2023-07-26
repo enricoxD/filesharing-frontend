@@ -6,7 +6,6 @@ export default function Page() {
   return (
     <main>
       <section className={"hero-section section is-flex-column"}>
-          <span className={"purple-blob"}/>
           <h1 className={"title gradient-text"}>Filesharing</h1>
           <h2 className={"subtitle"}>Simple sharing, storing and managing</h2>
           <Button href={"/upload"} layout={"gradient"}>
