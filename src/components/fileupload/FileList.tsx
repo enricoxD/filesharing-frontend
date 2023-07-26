@@ -1,6 +1,6 @@
 import {FileUploadType} from "@/utils/baseTypes";
 import Icon from "@mdi/react";
-import {mdiChevronDown} from "@mdi/js";
+import {mdiChevronDown, mdiProgressDownload} from "@mdi/js";
 import React, {useEffect, useState} from "react";
 import {FileUtils} from "@/utils/fileUtils";
 
@@ -21,10 +21,6 @@ export const FileList = ({
 }: FileListProps) => {
   const [showFiles, setShowFiles] = useState(false);
 
-  const invokeAction = (file: FileUploadType | File) => {
-    return () => actionCallback(file)
-  }
-
   const toggleCollapse = () => {
     if (!collapse) return;
     if (files.length == 0) {
@@ -39,13 +35,19 @@ export const FileList = ({
   }, [files])
 
   const FileEntry = ({file, index}: { file: File | FileUploadType, index: number }) => {
+    const [downloading, setDownloading] = useState<boolean>(false)
     return (
       <div className={`entry ${index % 2 === 0 ? 'even' : 'odd'}`}>
         <p className="index">{index + 1}.</p>
         <p className="filename">{FileUtils.getName(file)}<span>.{FileUtils.getFileExtension(file)}</span></p>
         <p className="filesize">{FileUtils.getFormattedFileSize(file)}</p>
-        <p className="action" onClick={invokeAction(file)}>
-          <Icon path={actionIcon} className={`action-icon ${iconHoverColor}`}/>
+        <p className="action" onClick={() => {
+          if (!downloading) {
+            setDownloading(true)
+            actionCallback(file)
+          }
+        }}>
+          <Icon path={downloading ? mdiProgressDownload : actionIcon} className={`action-icon ${downloading ? "downloading" : iconHoverColor}`}/>
         </p>
       </div>
     );
