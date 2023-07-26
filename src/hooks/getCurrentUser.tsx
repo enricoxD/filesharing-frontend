@@ -1,10 +1,11 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {UserType} from "@/utils/baseTypes";
 import {api} from "@/utils/api";
 import {useStickyState} from "@/hooks/useStickyState";
 
 export const useCurrentUser = (): UserType | null => {
-  const [user, setUser] = useStickyState<UserType | null>('current-user', null);
+  //const [user, setUser] = useStickyState<UserType | null>('current-user', null);
+  const [user, setUser] = useState<UserType | null>(null);
 
   useEffect(() => {
     api.get('user/current-user')
