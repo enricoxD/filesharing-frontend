@@ -37,12 +37,12 @@ const Textfield: React.FC<TextfieldProps> = (props) => {
         onChange={(event) => onChange && onChange(event)}
       />
       {password && (
-        <a className={`toggle-password-icon`} onClick={() => setShowInput(!showInput)}>
+        <div className={`toggle-password-icon`} onClick={() => setShowInput(!showInput)}>
           {<Icon
             path={showInput ? mdiEyeOff : mdiEye}
             className={showInput ? 'shown' : 'hidden'}
           />}
-        </a>
+        </div>
       )}
     </div>
   );
