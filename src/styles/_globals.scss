@@ -133,6 +133,10 @@ progress {
   color: transparent;
 }
 
+.error-text {
+  color: $red-300;
+}
+
 @keyframes glowing {
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
