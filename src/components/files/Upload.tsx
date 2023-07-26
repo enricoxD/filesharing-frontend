@@ -12,7 +12,8 @@ import {useCurrentUser} from "@/hooks/getCurrentUser";
 export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: GetUploadFormData }) => {
   const {author, title, uploadedAt, files} = upload
   const [authorInformation, setAuthorInformation] = useState<AuthorInformation>()
-  const [disableDownloadAllButton, setDisableDownloadAllButton] = useState(false)
+  const [downloadStarted, setDownloadStarted] = useState(false)
+  const [progress, setProgress] = useState(0);
   const user = useCurrentUser()
 
   const requestAuthorInformation = async () => {
@@ -35,11 +36,14 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
   }
 
   const requestPackageDownload = async () => {
-    setDisableDownloadAllButton(true)
+    setDownloadStarted(true)
     api.post("/file/requestdownloadall", {
       ...uploadData
     }, {
-      responseType: "blob"
+      responseType: "blob",
+      onDownloadProgress: (progressEvent) => {
+        setProgress((progressEvent.progress || 0) * 100);
+      }
     }).then((response) => {
       download(response.data, `${title.toLowerCase().replaceAll(' ', '_')}-bundle.zip`)
     })
@@ -91,17 +95,23 @@ export const Upload = ({upload, uploadData}: { upload: UploadType, uploadData: G
         actionCallback={(file) => requestDownload(file)}
       />
       <div className={"section is-flex h-center-content"}>
-        <Button onClick={requestPackageDownload} layout={"gradient"} className={"desktop-one-third"}
-                disabled={disableDownloadAllButton}>
-          <p>{disableDownloadAllButton ? "Download started" : "Download All"}</p>
-        </Button>
+        {downloadStarted ?
+          <div className={"download-progress"}>
+            <p>{progress.toString().split(".")[0]}% Finished</p>
+            <progress max={100} value={progress}>{progress}%</progress>
+          </div>
+          :
+          <Button onClick={requestPackageDownload} layout={"gradient"} className={"desktop-one-third"} disabled={downloadStarted}>
+            <p>Download All</p>
+          </Button>
+        }
       </div>
 
       { user && (user.id == author || user.role == "ADMIN") &&
           <div className={"is-flex-column h-center-content"}>
             <p>Content Moderation</p>
             <Button onClick={requestDeletion} layout={"filled-red"} className={"desktop-one-third"}
-                    disabled={disableDownloadAllButton}>
+                    disabled={downloadStarted}>
               <p>Delete Upload</p>
             </Button>
           </div>

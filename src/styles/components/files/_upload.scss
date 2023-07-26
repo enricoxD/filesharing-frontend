@@ -74,4 +74,11 @@
       }
     }
   }
+
+  .download-progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
