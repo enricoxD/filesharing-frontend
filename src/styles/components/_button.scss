@@ -88,6 +88,7 @@
       //background: linear-gradient(119deg, $primary-400 0%, $primary-300 6%, $primary-100 25%, $primary-600 66%, $primary-500 90%, $primary-100 300%);
       background: rgba($surface-200, 0.75);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       background-size: 400% 100%;
       left: 0;
       top: 0;
