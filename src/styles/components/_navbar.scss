@@ -110,10 +110,6 @@
 }
 
 .page-with-navbar {
-  @include tablet {
-    margin-left: 5rem;
-  }
-
   @include mobile {
     margin-bottom: 5rem;
   }
