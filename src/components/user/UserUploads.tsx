@@ -9,7 +9,7 @@ const UploadEntry = ({upload, type}: { upload: UploadListEntry, type: 'own' | 's
 
   return (
     <Link className={"upload-entry"} href={`${BASE_URL}/file/${author}/${id}`}>
-      <p className={"title"}>{title}{title}{title}{title}</p>
+      <p className={"title"}>{title}</p>
       <p className={"author"}>{authorName}</p>
       <p className={"time"}>{timeAsString(uploadedAt)}</p>
       <p className={"file-amount"}>{filesAmount}</p>
